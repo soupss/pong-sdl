@@ -1,4 +1,4 @@
-INC_DIR := include
+INC_DIR := inc
 SRC_DIR := src
 OBJ_DIR := obj
 
@@ -14,10 +14,10 @@ OBJECTS := $(SOURCES:$(SRC_DIR)/%.cpp=$(OBJ_DIR)/%.o)
 DEPS    := $(wildcard $(OBJ_DIR)/*.d)
 
 $(OUT): $(OBJECTS)
-	    $(CC) $(LDFLAGS) $^ $(LDLIBS) -o $@
+	@$(CC) $(LDFLAGS) $^ $(LDLIBS) -o $@
 
 $(OBJECTS): $(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp
-	    $(CXX) $(CXXFLAGS) $(CPPFLAGS) -c $(OUTPUT_OPTION) $<
+	@$(CXX) $(CXXFLAGS) $(CPPFLAGS) -c $(OUTPUT_OPTION) $<
 
 clean:
 	$(RM) $(DEPS) $(OBJECTS) $(OUT)
