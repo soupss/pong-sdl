@@ -9,6 +9,6 @@ class Resources {
     public:
         Resources();
         ~Resources();
-        SDL_Surface* loadSurface(std::string path, SDL_Surface* _screenSurface);
+        SDL_Texture* loadTexture(std::string _path, SDL_Renderer* _renderer);
 };
 #endif

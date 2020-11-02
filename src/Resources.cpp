@@ -14,18 +14,19 @@ Resources::~Resources() {
     IMG_Quit();
 }
 
-SDL_Surface* Resources::loadSurface(std::string path, SDL_Surface* _screenSurface) {
-    SDL_Surface* optimizedSurface = NULL;
-    SDL_Surface* loadedSurface = IMG_Load(path.c_str());
+SDL_Texture* Resources::loadTexture(std::string _path, SDL_Renderer* _renderer) {
+    SDL_Surface* loadedSurface = nullptr;
+    SDL_Texture* texture = nullptr;
+    loadedSurface = IMG_Load(_path.c_str());
     if(loadedSurface == NULL) {
-        std::cerr << "Unable to load image " << path.c_str() << ": " << IMG_GetError();
+        std::cerr << "Unable to load image " << _path.c_str() << ": " << IMG_GetError();
     }
     else {
-        optimizedSurface = SDL_ConvertSurface(loadedSurface, _screenSurface->format, 0);
+        texture = SDL_CreateTextureFromSurface(_renderer, loadedSurface);
         if(loadedSurface == NULL) {
-            std::cerr << "Unable to optimize image " << path.c_str() << ": " << IMG_GetError();
+            std::cerr << "Unable to convert surface " << _path.c_str() << ": " << IMG_GetError();
         }
         SDL_FreeSurface(loadedSurface);
     }
-    return optimizedSurface;
+    return texture;
 }
