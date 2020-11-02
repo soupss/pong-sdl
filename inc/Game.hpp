@@ -3,6 +3,7 @@
 
 #include <SDL2/SDL.h>
 #include "Game.hpp"
+#include "Renderer.hpp"
 
 class Game {
     public:
@@ -15,5 +16,6 @@ class Game {
         bool quit;
         SDL_Window* window;
         SDL_Surface* screenSurface;
+        Renderer renderer;
 };
 #endif

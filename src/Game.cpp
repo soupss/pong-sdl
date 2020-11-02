@@ -14,6 +14,7 @@ Game::Game() {
         }
         else {
             screenSurface = SDL_GetWindowSurface(window);
+            renderer = Renderer(window);
         }
     }
 }
