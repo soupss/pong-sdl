@@ -4,7 +4,7 @@
 int main(int argc, char* args[]){
     Game game;
     while(!game.hasQuit()){
-        game.handle_events();
+        game.handleEvents();
         game.display();
     }
     return 0;

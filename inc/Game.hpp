@@ -8,7 +8,7 @@ class Game {
     public:
         Game();
         ~Game();
-        void handle_events();
+        void handleEvents();
         void display();
         bool hasQuit(){ return quit; }
     private:
