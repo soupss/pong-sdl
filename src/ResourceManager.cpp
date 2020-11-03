@@ -1,7 +1,7 @@
-#include "Resources.hpp"
+#include "ResourceManager.hpp"
 #include <iostream>
 
-Resources::Resources()
+ResourceManager::ResourceManager()
 {
     if(!(IMG_Init(IMG_INIT_PNG) & IMG_INIT_PNG))
     {
@@ -9,12 +9,12 @@ Resources::Resources()
     }
 }
 
-Resources::~Resources()
+ResourceManager::~ResourceManager()
 {
     IMG_Quit();
 }
 
-SDL_Texture* Resources::loadTexture(std::string _path, SDL_Renderer* _renderer)
+SDL_Texture* ResourceManager::loadTexture(const std::string _path, SDL_Renderer* _renderer)
 {
     SDL_Surface* loadedSurface = nullptr;
     SDL_Texture* texture = nullptr;

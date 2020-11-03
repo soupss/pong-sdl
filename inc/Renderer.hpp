@@ -8,6 +8,7 @@ class Renderer
         Renderer();
         Renderer(SDL_Window* _window);
         ~Renderer();
+        SDL_Renderer* get() {return renderer;}
         void clear();
         void render(SDL_Texture* _texture, const SDL_Rect* _srcRect, const SDL_Rect* _dstRect);
         void display();

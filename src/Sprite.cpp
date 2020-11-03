@@ -1,15 +1,22 @@
 #include "Sprite.hpp"
 
-Sprite::Sprite(int _x, int _y, SDL_Surface* _surface)
-    :x(_x), y(_y), surface(_surface)
+Sprite::Sprite()
 {
-    rect.x = x;
-    rect.y = y;
-    rect.w = surface->w;
-    rect.h = surface->h;
+}
+
+Sprite::Sprite(int _x, int _y, SDL_Texture* _texture)
+    :x(_x), y(_y), texture(_texture)
+{
+    rect->x = x;
+    rect->y = y;
+    //get texture size
+    int textureW, textureH;
+    SDL_QueryTexture(texture, NULL, NULL, &textureW, &textureH);
+    rect->w = textureW;
+    rect->h = textureH;
 }
 
 Sprite::~Sprite()
 {
-    SDL_FreeSurface(surface);
+    SDL_DestroyTexture(texture);
 }

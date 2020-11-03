@@ -5,11 +5,14 @@
 class Sprite
 {
     public:
-        Sprite(int _x, int _y, SDL_Surface* _surface);
+        Sprite();
+        Sprite(int _x, int _y, SDL_Texture* _texture);
         ~Sprite();
+        SDL_Texture* getTexture() {return texture;}
+        SDL_Rect* getRect() {return rect;}
     protected:
         int x, y;
-        SDL_Rect rect;
-        SDL_Surface* surface;
+        SDL_Texture* texture;
+        SDL_Rect* rect;
 };
 #endif

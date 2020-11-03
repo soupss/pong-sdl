@@ -3,6 +3,8 @@
 #include <SDL2/SDL.h>
 #include "Game.hpp"
 #include "Renderer.hpp"
+#include "ResourceManager.hpp"
+#include "Paddle.hpp"
 
 class Game
 {
@@ -10,12 +12,16 @@ class Game
         Game();
         ~Game();
         void handleEvents();
-        void display();
-        bool hasQuit(){ return quit; }
+        void draw();
+        bool hasQuit() {return quit;}
     private:
-        bool quit;
         SDL_Window* window;
         SDL_Surface* screenSurface;
+        SDL_Rect* screenRect;
+        ResourceManager resourceManager;
         Renderer renderer;
+        Paddle player1;
+        /* Paddle player2; */
+        bool quit;
 };
 #endif

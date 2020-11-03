@@ -18,7 +18,7 @@ Renderer::~Renderer()
 
 void Renderer::clear()
 {
-
+    SDL_RenderClear(renderer);
 }
 
 void Renderer::render(SDL_Texture* _texture, const SDL_Rect* _srcRect, const SDL_Rect* _dstRect)
