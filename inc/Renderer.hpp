@@ -1,9 +1,9 @@
 #ifndef RENDERER_HPP
 #define RENDERER_HPP
-
 #include <SDL2/SDL.h>
 
-class Renderer {
+class Renderer
+{
     public:
         Renderer();
         Renderer(SDL_Window* _window);

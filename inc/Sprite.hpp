@@ -1,9 +1,9 @@
-#ifndef ENTITY_HPP
-#define ENTITY_HPP
-
+#ifndef SPRITE_HPP
+#define SPRITE_HPP
 #include <SDL2/SDL.h>
 
-class Sprite {
+class Sprite
+{
     public:
         Sprite(int _x, int _y, SDL_Surface* _surface);
         ~Sprite();

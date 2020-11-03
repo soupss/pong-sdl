@@ -1,11 +1,11 @@
 #ifndef GAME_HPP
 #define GAME_HPP
-
 #include <SDL2/SDL.h>
 #include "Game.hpp"
 #include "Renderer.hpp"
 
-class Game {
+class Game
+{
     public:
         Game();
         ~Game();
