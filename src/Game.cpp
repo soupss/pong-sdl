@@ -27,10 +27,9 @@ Game::Game()
                 std::cout << "init success\n";
                 //sdl init success
                 paddleTexture = IMG_LoadTexture(SDL_GetRenderer(window), "res/gfx/paddle.png");
-                if(paddleTexture == NULL)
                 int paddleW, paddleH;
                 SDL_QueryTexture(paddleTexture, NULL, NULL, &paddleW, &paddleH);
-                paddleRect = { 100, 100, paddleW, paddleH};
+                paddleRect = {200, 100, paddleW, paddleH};
             }
         }
     }
@@ -39,6 +38,7 @@ Game::Game()
 Game::~Game()
 {
     SDL_DestroyWindow(window);
+    IMG_Quit();
     SDL_Quit();
 }
 
