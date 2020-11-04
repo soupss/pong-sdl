@@ -13,7 +13,7 @@ class Game
         bool isRunning() {return running;}
     private:
         SDL_Window* window;
-        Renderer renderObj;
+        Renderer rendererObj;
         SDL_Event event;
         SDL_Texture* paddleTexture;
         SDL_Rect paddleRect;

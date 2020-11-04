@@ -1,6 +1,6 @@
-#include "Game.hpp"
-#include <iostream>
 #include <SDL2/SDL_image.h>
+#include <iostream>
+#include "Game.hpp"
 
 Game::Game()
     :running(true)
@@ -26,7 +26,8 @@ Game::Game()
             {
                 std::cout << "init success\n";
                 //sdl init success
-                paddleTexture = IMG_LoadTexture(SDL_GetRenderer(window), "res/gfx/paddle.png");
+                rendererObj.create(window);
+                paddleTexture = IMG_LoadTexture(rendererObj.get(), "res/gfx/paddle.png");
                 int paddleW, paddleH;
                 SDL_QueryTexture(paddleTexture, NULL, NULL, &paddleW, &paddleH);
                 paddleRect = {200, 100, paddleW, paddleH};
@@ -57,7 +58,7 @@ void Game::events()
 
 void Game::draw()
 {
-    renderObj.clear();
-    renderObj.render(paddleTexture, paddleRect);
-    renderObj.present();
+    rendererObj.clear();
+    rendererObj.render(paddleTexture, paddleRect);
+    rendererObj.present();
 }

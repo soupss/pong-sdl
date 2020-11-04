@@ -1,13 +1,13 @@
 #include "Renderer.hpp"
 
-Renderer::Renderer(SDL_Window* _window)
-{
-    renderer = SDL_CreateRenderer(_window, -1, SDL_RENDERER_ACCELERATED);
-}
-
 Renderer::~Renderer()
 {
     SDL_DestroyRenderer(renderer);
+}
+
+void Renderer::create(SDL_Window* _window)
+{
+    renderer = SDL_CreateRenderer(_window, -1, SDL_RENDERER_ACCELERATED);
 }
 
 void Renderer::clear()
