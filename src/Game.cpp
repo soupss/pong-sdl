@@ -3,7 +3,7 @@
 #include "Game.hpp"
 
 Game::Game()
-    :running(true)
+    :running(true), SCREEN_WIDTH(800), SCREEN_HEIGHT(600)
 {
     if(SDL_Init(SDL_INIT_VIDEO) != 0)
     {
@@ -11,7 +11,7 @@ Game::Game()
     }
     else
     {
-        window = SDL_CreateWindow("Pong", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, 800, 600, 0);
+        window = SDL_CreateWindow("Pong", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, 0);
         if(window == NULL)
         {
             std::cerr << "Error creating window: " << SDL_GetError() << std::endl;
@@ -24,11 +24,9 @@ Game::Game()
             }
             else
             {
-                std::cout << "init success\n";
-                //sdl init success
-                rendererObj.create(window);
-                SDL_Texture* paddleTexture = IMG_LoadTexture(rendererObj.get(), "res/gfx/paddle.png");
-                /* sprites.push_back(new Sprite(paddleTexture, 10, 100)); */
+                //create renderer
+                renderer.init(window);
+                SDL_Texture* paddleTexture = IMG_LoadTexture(renderer.get(), "res/gfx/paddle.png");
                 std::shared_ptr<Sprite> player1 = std::make_shared<Sprite>(paddleTexture, 10, 100);
                 sprites.push_back(player1);
             }
@@ -58,10 +56,10 @@ void Game::events()
 
 void Game::draw()
 {
-    rendererObj.clear();
+    renderer.clear();
     for(std::shared_ptr<Sprite> sprite:sprites)
     {
-        rendererObj.render(sprite->getTexture(), sprite->getRect());
+        renderer.render(sprite->getTexture(), sprite->getRect());
     }
-    rendererObj.present();
+    renderer.present();
 }

@@ -16,9 +16,10 @@ class Game
         bool isRunning() {return running;}
     private:
         SDL_Window* window;
-        Renderer rendererObj;
+        Renderer renderer;
         SDL_Event event;
         std::list<std::shared_ptr<Sprite>> sprites;
         bool running;
+        const int SCREEN_WIDTH, SCREEN_HEIGHT;
 };
 #endif

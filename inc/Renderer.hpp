@@ -5,9 +5,10 @@
 class Renderer
 {
     public:
-        Renderer() = default;
+        Renderer();
         ~Renderer();
-        void create(SDL_Window* _window);
+        //cant be created in constructor since it needs a window, which is not created when constructor is called
+        void init(SDL_Window* _window);
         void clear();
         void render(SDL_Texture* _texture, SDL_Rect _rect);
         void present();

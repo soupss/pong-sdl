@@ -1,5 +1,9 @@
 #include "Renderer.hpp"
 
+Renderer::Renderer()
+    :renderer(nullptr)
+{ }
+
 Renderer::~Renderer()
 {
     SDL_DestroyRenderer(renderer);
