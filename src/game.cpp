@@ -27,8 +27,7 @@ Game::Game()
                 //create renderer
                 renderer.init(window);
                 SDL_Texture* paddleTexture = IMG_LoadTexture(renderer.get(), "res/gfx/paddle.png");
-                std::shared_ptr<Sprite> player1 = std::make_shared<Sprite>(paddleTexture, 10, 100);
-                sprites.push_back(player1);
+                player1.init(paddleTexture, 100, SCREEN_HEIGHT/2);
             }
         }
     }
@@ -57,9 +56,6 @@ void Game::events()
 void Game::draw()
 {
     renderer.clear();
-    for(std::shared_ptr<Sprite> sprite:sprites)
-    {
-        renderer.render(sprite->getTexture(), sprite->getRect());
-    }
+    renderer.render(player1.getTexture(), player1.getRect());
     renderer.present();
 }

@@ -9,7 +9,7 @@ Renderer::~Renderer()
     SDL_DestroyRenderer(renderer);
 }
 
-void Renderer::create(SDL_Window* _window)
+void Renderer::init(SDL_Window* _window)
 {
     renderer = SDL_CreateRenderer(_window, -1, SDL_RENDERER_ACCELERATED);
 }

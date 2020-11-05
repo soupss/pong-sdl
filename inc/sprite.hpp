@@ -5,11 +5,12 @@
 class Sprite
 {
     public:
-        Sprite(SDL_Texture* _texture, int _x, int _y);
+        Sprite() = default;
         ~Sprite();
+        void init(SDL_Texture* _texture, int _x, int _y);
         SDL_Rect getRect() {return rect;}
         SDL_Texture* getTexture() {return texture;}
-    private:
+    protected:
         SDL_Texture* texture;
         SDL_Rect rect;
 };

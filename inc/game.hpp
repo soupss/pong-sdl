@@ -4,7 +4,7 @@
 #include <list>
 #include <memory>
 #include "renderer.hpp"
-#include "sprite.hpp"
+#include "paddle.hpp"
 
 class Game
 {
@@ -18,7 +18,8 @@ class Game
         SDL_Window* window;
         Renderer renderer;
         SDL_Event event;
-        std::list<std::shared_ptr<Sprite>> sprites;
+        Paddle player1;
+        Paddle player2;
         bool running;
         const int SCREEN_WIDTH, SCREEN_HEIGHT;
 };
