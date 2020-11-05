@@ -23,7 +23,7 @@ For more help see
 
 ## Usage
 
-1. Build with makefile
+#### 1. Build with makefile
 
 Debug
 
@@ -39,7 +39,7 @@ $ make release
 
 The executable is located at *bin/debug/main* and *bin/release/main* respectively
 
-2. Run
+#### 2. Run
 
 ```
 $ ./bin/debug/main
