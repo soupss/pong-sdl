@@ -1,6 +1,6 @@
 #include <SDL2/SDL_image.h>
 #include <iostream>
-#include "Game.hpp"
+#include "game.hpp"
 
 Game::Game()
     :running(true), SCREEN_WIDTH(800), SCREEN_HEIGHT(600)

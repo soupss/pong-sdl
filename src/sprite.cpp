@@ -1,4 +1,4 @@
-#include "Sprite.hpp"
+#include "sprite.hpp"
 
 Sprite::Sprite(SDL_Texture* _texture, int _x, int _y)
     :texture(_texture)

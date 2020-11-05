@@ -3,8 +3,8 @@
 #include <SDL2/SDL.h>
 #include <list>
 #include <memory>
-#include "Renderer.hpp"
-#include "Sprite.hpp"
+#include "renderer.hpp"
+#include "sprite.hpp"
 
 class Game
 {
