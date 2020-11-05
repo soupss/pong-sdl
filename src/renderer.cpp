@@ -1,3 +1,4 @@
+#include <iostream>
 #include "renderer.hpp"
 
 Renderer::Renderer()
@@ -21,6 +22,10 @@ void Renderer::clear()
 
 void Renderer::render(SDL_Texture* _texture, SDL_Rect _rect)
 {
+    if(_texture==NULL)
+    {
+        std::cout << "texture is NULL\n";
+    }
     SDL_RenderCopy(renderer, _texture, NULL, &_rect);
 }
 

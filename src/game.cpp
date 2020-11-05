@@ -27,7 +27,14 @@ Game::Game()
                 //create renderer
                 renderer.init(window);
                 SDL_Texture* paddleTexture = IMG_LoadTexture(renderer.get(), "res/gfx/paddle.png");
-                player1.init(paddleTexture, 100, SCREEN_HEIGHT/2);
+                SDL_Texture* ballTexture = IMG_LoadTexture(renderer.get(), "res/gfx/ball.png");
+                player1.init(paddleTexture);
+                player2.init(paddleTexture);
+                ball.init(ballTexture);
+                int spacing = 100;
+                player1.setPos(spacing, (SCREEN_HEIGHT/2)-(player1.getRect().h/2));
+                player2.setPos(SCREEN_WIDTH+player2.getRect().w-spacing, (SCREEN_HEIGHT/2)-(player1.getRect().h/2));
+                ball.setPos((SCREEN_WIDTH/2)-(ball.getRect().w/2), (SCREEN_HEIGHT/2)-(ball.getRect().h/2));
             }
         }
     }
@@ -57,5 +64,7 @@ void Game::draw()
 {
     renderer.clear();
     renderer.render(player1.getTexture(), player1.getRect());
+    renderer.render(player2.getTexture(), player2.getRect());
+    renderer.render(ball.getTexture(), ball.getRect());
     renderer.present();
 }

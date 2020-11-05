@@ -5,6 +5,7 @@
 #include <memory>
 #include "renderer.hpp"
 #include "paddle.hpp"
+#include "ball.hpp"
 
 class Game
 {
@@ -20,6 +21,7 @@ class Game
         SDL_Event event;
         Paddle player1;
         Paddle player2;
+        Ball ball;
         bool running;
         const int SCREEN_WIDTH, SCREEN_HEIGHT;
 };
