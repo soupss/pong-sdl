@@ -27,10 +27,10 @@ Game::Game()
                 std::cout << "init success\n";
                 //sdl init success
                 rendererObj.create(window);
-                paddleTexture = IMG_LoadTexture(rendererObj.get(), "res/gfx/paddle.png");
-                int paddleW, paddleH;
-                SDL_QueryTexture(paddleTexture, NULL, NULL, &paddleW, &paddleH);
-                paddleRect = {200, 100, paddleW, paddleH};
+                SDL_Texture* paddleTexture = IMG_LoadTexture(rendererObj.get(), "res/gfx/paddle.png");
+                /* sprites.push_back(new Sprite(paddleTexture, 10, 100)); */
+                std::shared_ptr<Sprite> player1 = std::make_shared<Sprite>(paddleTexture, 10, 100);
+                sprites.push_back(player1);
             }
         }
     }
@@ -59,6 +59,9 @@ void Game::events()
 void Game::draw()
 {
     rendererObj.clear();
-    rendererObj.render(paddleTexture, paddleRect);
+    for(std::shared_ptr<Sprite> sprite:sprites)
+    {
+        rendererObj.render(sprite->getTexture(), sprite->getRect());
+    }
     rendererObj.present();
 }
