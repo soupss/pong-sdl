@@ -25,13 +25,13 @@ For more help see
 
 1. Build with makefile
 
-#### Debug
+Debug
 
 ```
 $ make
 ```
 
-#### Release (You probably want this)
+Release (You probably want this)
 
 ```
 $ make release
