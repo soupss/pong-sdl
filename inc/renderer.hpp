@@ -10,9 +10,8 @@ class Renderer
         //cant be created in constructor since it needs a window, which is not created when constructor is called
         void init(SDL_Window* _window);
         void clear();
-        void render(SDL_Texture* _texture, SDL_Rect _rect);
+        void render(SDL_Rect _rect);
         void present();
-        SDL_Renderer* get() {return renderer;}
     private:
         SDL_Renderer* renderer;
 };

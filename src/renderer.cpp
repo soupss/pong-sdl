@@ -17,16 +17,14 @@ void Renderer::init(SDL_Window* _window)
 
 void Renderer::clear()
 {
+    SDL_SetRenderDrawColor(renderer, 0x00, 0x00, 0xFF, 0xFF);
     SDL_RenderClear(renderer);
 }
 
-void Renderer::render(SDL_Texture* _texture, SDL_Rect _rect)
+void Renderer::render(SDL_Rect _rect)
 {
-    if(_texture==NULL)
-    {
-        std::cout << "texture is NULL\n";
-    }
-    SDL_RenderCopy(renderer, _texture, NULL, &_rect);
+    SDL_SetRenderDrawColor(renderer, 0xFF, 0xFF, 0xFF, 0xFF);
+    SDL_RenderFillRect(renderer, &_rect);
 }
 
 void Renderer::present()

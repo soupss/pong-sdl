@@ -6,13 +6,10 @@ class Sprite
 {
     public:
         Sprite() = default;
-        ~Sprite();
-        void init(SDL_Texture* _texture);
-        void setPos(int _x, int _y);
+        ~Sprite() = default;
+        virtual void init(int _x, int _y, int _w, int _h);
         SDL_Rect getRect() {return rect;}
-        SDL_Texture* getTexture() {return texture;}
     protected:
-        SDL_Texture* texture;
         SDL_Rect rect;
 };
 #endif

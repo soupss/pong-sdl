@@ -16,13 +16,13 @@ class Game
         void draw();
         bool isRunning() {return running;}
     private:
+        bool running;
+        const int SCREEN_WIDTH, SCREEN_HEIGHT;
         SDL_Window* window;
         Renderer renderer;
         SDL_Event event;
         Paddle player1;
         Paddle player2;
         Ball ball;
-        bool running;
-        const int SCREEN_WIDTH, SCREEN_HEIGHT;
 };
 #endif
