@@ -28,4 +28,4 @@ $(OBJS): $(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp
 	@$(CXX) $(CXXFLAGS) $(CPPFLAGS) -c $(OUTPUT_OPTION) $<
 
 clean:
-	-@$(RM) $(DEPS) $(OBJS) bin/debug/$(BIN) bin/release/$(BIN)
+	-@$(RM) $(OBJ_DIR)/* bin/debug/$(BIN) bin/release/$(BIN)
