@@ -7,7 +7,7 @@ class Paddle : public Sprite
 {
     public:
         const static int WIDTH = 15, HEIGHT = 90;
-        Paddle() = default;
-        void init(int _x, int _y);
+        int GET_WIDTH() override {return WIDTH;}
+        int GET_HEIGHT() override {return HEIGHT;}
 };
 #endif

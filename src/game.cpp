@@ -28,12 +28,9 @@ Game::Game()
                 renderer.init(window);
                 //init sprites
                 int spacing = 50;
-                player1.init(spacing,
-                        SCREEN_HEIGHT/2 - Paddle::HEIGHT/2);
-                player2.init(SCREEN_WIDTH - Paddle::WIDTH - spacing,
-                        SCREEN_HEIGHT/2 - Paddle::HEIGHT/2);
-                ball.init(SCREEN_WIDTH/2 - Ball::WIDTH/2,
-                        SCREEN_HEIGHT/2 - Ball::HEIGHT/2);
+                player1.init(spacing, SCREEN_HEIGHT/2-Paddle::HEIGHT/2);
+                player2.init(SCREEN_WIDTH-Paddle::WIDTH-spacing, SCREEN_HEIGHT/2-Paddle::HEIGHT/2);
+                ball.init(SCREEN_WIDTH/2-Ball::WIDTH/2, SCREEN_HEIGHT/2-Ball::HEIGHT/2);
             }
         }
     }
@@ -57,6 +54,13 @@ void Game::events()
                 break;
         }
     }
+}
+
+void Game::update()
+{
+    player1.update();
+    player2.update();
+    ball.update();
 }
 
 void Game::draw()

@@ -6,6 +6,7 @@ int main(int argc, char* argv[])
     while(game.isRunning())
     {
         game.events();
+        game.update();
         game.draw();
     }
     return 0;

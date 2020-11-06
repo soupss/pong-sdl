@@ -13,6 +13,7 @@ class Game
         Game();
         ~Game();
         void events();
+        void update();
         void draw();
         bool isRunning() {return running;}
     private:
