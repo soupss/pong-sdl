@@ -9,5 +9,6 @@ class Paddle : public Sprite
         const static int WIDTH = 15, HEIGHT = 90;
         int GET_WIDTH() override {return WIDTH;}
         int GET_HEIGHT() override {return HEIGHT;}
+        void setY(float _y);
 };
 #endif

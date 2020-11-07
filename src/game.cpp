@@ -24,12 +24,14 @@ Game::Game()
             }
             else
             {
+                SDL_ShowCursor(SDL_DISABLE);
                 //create renderer
                 renderer.init(window);
                 //init sprites
-                int spacing = 50;
-                player1.init(spacing, SCREEN_HEIGHT/2-Paddle::HEIGHT/2);
-                player2.init(SCREEN_WIDTH-Paddle::WIDTH-spacing, SCREEN_HEIGHT/2-Paddle::HEIGHT/2);
+                const int edge = 50;
+                const int paddleY = SCREEN_HEIGHT/2-Paddle::HEIGHT/2;
+                player1.init(edge, paddleY);
+                player2.init(SCREEN_WIDTH-Paddle::WIDTH-edge, paddleY);
                 ball.init(SCREEN_WIDTH/2-Ball::WIDTH/2, SCREEN_HEIGHT/2-Ball::HEIGHT/2);
             }
         }
@@ -51,29 +53,20 @@ void Game::events()
         {
             running = false;
         }
-        else if(event.type == SDL_KEYDOWN){
-            std::cout << "keydown: " << event.key.keysym.sym << std::endl;
-            switch(event.key.keysym.sym)
+        else if(event.type == SDL_MOUSEMOTION){
+            int mouseY;
+            SDL_GetMouseState(NULL, &mouseY);
+            int playerY = mouseY-player1.GET_HEIGHT()/2;
+            const int bottom = SCREEN_HEIGHT - player1.GET_HEIGHT();
+            if(playerY < 0)
             {
-                case SDLK_UP:
-                    player1.setVel(0, -0.004);
-                    break;
-                case SDLK_DOWN:
-                    player1.setVel(0, 0.004);
-                    break;
+                playerY = 0;
             }
-        }
-        else if(event.type == SDL_KEYUP){
-            std::cout << "keyup: " << event.key.keysym.sym << std::endl;
-            switch(event.key.keysym.sym)
+            else if(playerY > bottom)
             {
-                case SDLK_UP:
-                    player1.setVel(0, 0);
-                    break;
-                case SDLK_DOWN:
-                    player1.setVel(0, 0);
-                    break;
+                playerY = bottom;
             }
+            player1.setY(playerY);
         }
     }
 }

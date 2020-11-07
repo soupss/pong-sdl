@@ -9,11 +9,9 @@ class Sprite
         void init(float _x, float _y);
         void update();
         SDL_Rect getRect() {return rect;}
-        void setVel(float _x, float _y);
     protected:
         SDL_Rect rect;
         Vector2f pos;
-        Vector2f vel;
         virtual int GET_WIDTH() = 0;
         virtual int GET_HEIGHT() = 0;
 };
