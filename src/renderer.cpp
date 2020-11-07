@@ -1,4 +1,3 @@
-#include <iostream>
 #include "renderer.hpp"
 
 Renderer::Renderer()
