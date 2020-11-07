@@ -47,11 +47,33 @@ void Game::events()
 {
     while(SDL_PollEvent(&event) != 0)
     {
-        switch(event.type)
+        if(event.type == SDL_QUIT)
         {
-            case SDL_QUIT:
-                running = false;
-                break;
+            running = false;
+        }
+        else if(event.type == SDL_KEYDOWN){
+            std::cout << "keydown: " << event.key.keysym.sym << std::endl;
+            switch(event.key.keysym.sym)
+            {
+                case SDLK_UP:
+                    player1.setVel(0, -0.004);
+                    break;
+                case SDLK_DOWN:
+                    player1.setVel(0, 0.004);
+                    break;
+            }
+        }
+        else if(event.type == SDL_KEYUP){
+            std::cout << "keyup: " << event.key.keysym.sym << std::endl;
+            switch(event.key.keysym.sym)
+            {
+                case SDLK_UP:
+                    player1.setVel(0, 0);
+                    break;
+                case SDLK_DOWN:
+                    player1.setVel(0, 0);
+                    break;
+            }
         }
     }
 }
