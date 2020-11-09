@@ -1,6 +1,7 @@
 #include <SDL2/SDL_image.h>
 #include <SDL2/SDL_ttf.h>
 #include <iostream>
+#include <string>
 #include "game.hpp"
 
 Game::Game()
@@ -106,6 +107,7 @@ void Game::draw()
     renderer.renderRect(player2.getRect());
     renderer.renderRect(ball.getRect());
     SDL_Color color = {0xFF, 0xB5, 0x00, 0xFF};
-    renderer.renderText("TEXT :)", 300, 10, color);
+    std::string text = "this text";
+    renderer.renderText(text, 300, 10, color);
     renderer.present();
 }

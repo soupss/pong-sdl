@@ -8,6 +8,7 @@ Renderer::Renderer()
 Renderer::~Renderer()
 {
     TTF_CloseFont(font);
+    SDL_DestroyTexture(fontCache_texture);
     SDL_DestroyRenderer(renderer);
 }
 
@@ -22,7 +23,7 @@ void Renderer::init(SDL_Window* _window)
 
 void Renderer::loadFont(int _size)
 {
-    font = TTF_OpenFont("res/fonts/bpdots.unicasesquare-bold.otf", _size);
+    font = TTF_OpenFont("assets/fonts/bpdots.unicasesquare-bold.otf", _size);
     if(!font)
     {
         std::cerr << "Unable to load font: " << TTF_GetError() << std::endl;
@@ -40,30 +41,42 @@ void Renderer::renderTexture(SDL_Texture* _texture, SDL_Rect _rect)
     SDL_RenderCopy(renderer, _texture, NULL, &_rect);
 }
 
-void Renderer::renderText(const char* _text, int _x, int _y, SDL_Color _color)
+void Renderer::renderText(std::string _text, int _x, int _y, SDL_Color _color)
 {
-    SDL_Surface* surface;
-    surface = TTF_RenderText_Solid(font, _text, _color);
-    if(surface == NULL)
+    SDL_Texture* texture;
+    //compare new text to font cache
+    if(_text == fontCache_text)
     {
-        std::cerr << "Unable to render text surface: " << TTF_GetError() << std::endl;
+        //load texture from font cache
+        texture = fontCache_texture;
     }
     else
     {
-        SDL_Texture* texture;
-        texture = SDL_CreateTextureFromSurface(renderer, surface);
-        if(texture == NULL)
+        //create new texture
+        SDL_Surface* surface;
+        surface = TTF_RenderText_Solid(font, _text.c_str(), _color);
+        if(surface == NULL)
         {
-            std::cerr << "Unable to create texture from rendered text: " << TTF_GetError() << std::endl;
+            std::cerr << "Unable to render text surface: " << TTF_GetError() << std::endl;
         }
         else
         {
-            SDL_Rect rect;
-            rect = {_x, _y, surface->w, surface->h};
-            renderTexture(texture, rect);
+            texture = SDL_CreateTextureFromSurface(renderer, surface);
+            if(texture == NULL)
+            {
+                std::cerr << "Unable to create texture from rendered text: " << TTF_GetError() << std::endl;
+            }
+            // update font cache
+            fontCache_text = _text;
+            fontCache_texture = texture;
         }
+        SDL_FreeSurface(surface);
     }
-    SDL_FreeSurface(surface);
+    SDL_Rect rect;
+    int w,h;
+    SDL_QueryTexture(texture, NULL, NULL, &w, &h);
+    rect = {_x, _y, w, h};
+    renderTexture(texture, rect);
 }
 
 void Renderer::clear()

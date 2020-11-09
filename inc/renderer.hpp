@@ -2,6 +2,7 @@
 #define RENDERER_HPP
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_ttf.h>
+#include <string>
 
 class Renderer
 {
@@ -13,11 +14,14 @@ class Renderer
         void loadFont(int _size);
         void renderRect(SDL_Rect _rect);
         void renderTexture(SDL_Texture* _texture, SDL_Rect _rect);
-        void renderText(const char* _text, int _x, int _y, SDL_Color _color);
+        void renderText(std::string _text, int _x, int _y, SDL_Color _color);
         void clear();
         void present();
     private:
         SDL_Renderer* renderer;
         TTF_Font* font;
+        //save last used font texture, dont create new if not necessary
+        SDL_Texture* fontCache_texture;
+        std::string fontCache_text;
 };
 #endif
