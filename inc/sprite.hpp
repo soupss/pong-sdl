@@ -8,11 +8,11 @@ class Sprite
     public:
         void init(float _x, float _y);
         void update();
-        SDL_Rect getRect() {return rect;}
+        inline SDL_Rect getRect() const {return rect;}
     protected:
         SDL_Rect rect;
         Vector2f pos;
-        virtual int GET_WIDTH() = 0;
-        virtual int GET_HEIGHT() = 0;
+        virtual int GET_WIDTH() const = 0;
+        virtual int GET_HEIGHT() const = 0;
 };
 #endif

@@ -10,7 +10,7 @@ class Game
     public:
         Game();
         ~Game();
-        bool isRunning() {return running;}
+        inline bool isRunning() const {return running;}
         void events();
         void update();
         void draw();

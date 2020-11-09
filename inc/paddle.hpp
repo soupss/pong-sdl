@@ -7,8 +7,8 @@ class Paddle : public Sprite
 {
     public:
         const static int WIDTH = 15, HEIGHT = 90;
-        int GET_WIDTH() override {return WIDTH;}
-        int GET_HEIGHT() override {return HEIGHT;}
+        inline int GET_WIDTH() const override {return WIDTH;}
+        inline int GET_HEIGHT() const override {return HEIGHT;}
         void setY(float _y);
 };
 #endif

@@ -6,7 +6,11 @@ struct Vector2f
     :x(0.0f), y(0.0f)
     { }
 
-    void print()
+    Vector2f(float _x, float _y)
+    :x(_x), y(_y)
+    { }
+
+    inline void print()
     {
         std::cout << x << ", " << y << std::endl;
     }
