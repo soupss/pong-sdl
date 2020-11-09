@@ -10,11 +10,12 @@ class Game
     public:
         Game();
         ~Game();
+        bool isRunning() {return running;}
         void events();
         void update();
         void draw();
-        bool isRunning() {return running;}
     private:
+        bool init();
         bool running;
         const int SCREEN_WIDTH, SCREEN_HEIGHT;
         SDL_Window* window;

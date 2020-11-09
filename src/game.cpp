@@ -1,13 +1,44 @@
 #include <SDL2/SDL_image.h>
+#include <SDL2/SDL_ttf.h>
 #include <iostream>
 #include "game.hpp"
 
 Game::Game()
     :running(true), SCREEN_WIDTH(800), SCREEN_HEIGHT(600)
 {
+    if(!init())
+    {
+        std::cout << "Init failed\n";
+    }
+    else
+    {
+        renderer.init(window);
+        renderer.loadFont(30);
+        SDL_ShowCursor(SDL_DISABLE);
+        //init sprites
+        const int edge = 50;
+        const int paddleY = SCREEN_HEIGHT/2-Paddle::HEIGHT/2;
+        player1.init(edge, paddleY);
+        player2.init(SCREEN_WIDTH-Paddle::WIDTH-edge, paddleY);
+        ball.init(SCREEN_WIDTH/2-Ball::WIDTH/2, SCREEN_HEIGHT/2-Ball::HEIGHT/2);
+    }
+}
+
+Game::~Game()
+{
+    SDL_DestroyWindow(window);
+    TTF_Quit();
+    IMG_Quit();
+    SDL_Quit();
+}
+
+bool Game::init()
+{
+    bool success = true;
     if(SDL_Init(SDL_INIT_VIDEO) != 0)
     {
         std::cerr << "SDL_Init error: " << SDL_GetError() << std::endl;
+        success = false;
     }
     else
     {
@@ -15,34 +46,24 @@ Game::Game()
         if(window == NULL)
         {
             std::cerr << "Error creating window: " << SDL_GetError() << std::endl;
+            success = false;
         }
         else
         {
+            //libs
             if(!(IMG_Init(IMG_INIT_PNG) & IMG_INIT_PNG))
             {
                 std::cerr << "IMG_Init error: " << IMG_GetError() << std::endl;
+                success = false;
             }
-            else
+            if(TTF_Init() == -1)
             {
-                SDL_ShowCursor(SDL_DISABLE);
-                //create renderer
-                renderer.init(window);
-                //init sprites
-                const int edge = 50;
-                const int paddleY = SCREEN_HEIGHT/2-Paddle::HEIGHT/2;
-                player1.init(edge, paddleY);
-                player2.init(SCREEN_WIDTH-Paddle::WIDTH-edge, paddleY);
-                ball.init(SCREEN_WIDTH/2-Ball::WIDTH/2, SCREEN_HEIGHT/2-Ball::HEIGHT/2);
+                std::cerr << "TTF_Init error: " << TTF_GetError() << std::endl;
+                success = false;
             }
         }
     }
-}
-
-Game::~Game()
-{
-    SDL_DestroyWindow(window);
-    IMG_Quit();
-    SDL_Quit();
+    return success;
 }
 
 void Game::events()
@@ -81,8 +102,10 @@ void Game::update()
 void Game::draw()
 {
     renderer.clear();
-    renderer.render(player1.getRect());
-    renderer.render(player2.getRect());
-    renderer.render(ball.getRect());
+    renderer.renderRect(player1.getRect());
+    renderer.renderRect(player2.getRect());
+    renderer.renderRect(ball.getRect());
+    SDL_Color color = {0xFF, 0xB5, 0x00, 0xFF};
+    renderer.renderText("TEXT :)", 300, 10, color);
     renderer.present();
 }
