@@ -3,7 +3,6 @@
 
 void Timer::start()
 {
-    started = true;
     startTicks = SDL_GetTicks();
 }
 
@@ -14,7 +13,7 @@ void Timer::countFrame()
 
 uint32_t Timer::getAvgFps()
 {
-    float secondsPassed = SDL_GetTicks() - startTicks / 1000.f;
+    float secondsPassed = (SDL_GetTicks() - startTicks) / 1000.f;
     float avgFps = countedFrames / secondsPassed;
     return avgFps;
 }

@@ -8,9 +8,9 @@ int main(int argc, char* argv[])
     {
         game.events();
         game.update();
-		game.draw();
+        game.draw();
         //to calculate fps
-		Timer::countFrame();
+        Timer::countFrame();
     }
     return 0;
 }

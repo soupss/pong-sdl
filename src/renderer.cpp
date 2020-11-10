@@ -14,7 +14,7 @@ Renderer::~Renderer()
 
 void Renderer::init(SDL_Window* _window)
 {
-    renderer = SDL_CreateRenderer(_window, -1, SDL_RENDERER_ACCELERATED);
+    renderer = SDL_CreateRenderer(_window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
     if(renderer == NULL)
     {
         std::cerr << "Unable to create renderer: " << SDL_GetError() << std::endl;
