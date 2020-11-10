@@ -6,7 +6,7 @@
 class Ball : public Sprite
 {
     public:
-        const static int WIDTH = 15, HEIGHT = 15;
+        const static int WIDTH = 20, HEIGHT = 20;
         inline int GET_WIDTH() const override {return WIDTH;}
         inline int GET_HEIGHT() const override {return HEIGHT;}
 };

@@ -4,7 +4,7 @@ OBJ_DIR := obj
 BIN := main
 
 all:     CPPFLAGS := -I $(INC_DIR) -MMD -MP
-all:     CXXFLAGS := -Wall -Wpedantic -g
+all:     CXXFLAGS := -Wall -Wpedantic -g -std=c++17
 all:     LDFLAGS  :=
 all:     LDLIBS   := -lSDL2 -lSDL2_image -lSDL2_ttf
 all:	 BIN_DIR  := bin/debug

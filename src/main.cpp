@@ -1,4 +1,5 @@
 #include "game.hpp"
+#include "timer.hpp"
 
 int main(int argc, char* argv[])
 {
@@ -7,7 +8,9 @@ int main(int argc, char* argv[])
     {
         game.events();
         game.update();
-        game.draw();
+		game.draw();
+        //to calculate fps
+		Timer::countFrame();
     }
     return 0;
 }

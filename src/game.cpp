@@ -1,11 +1,13 @@
 #include <SDL2/SDL_image.h>
 #include <SDL2/SDL_ttf.h>
 #include <iostream>
+#include <sstream>
 #include <string>
 #include "game.hpp"
+#include "timer.hpp"
 
 Game::Game()
-    :running(true), SCREEN_WIDTH(800), SCREEN_HEIGHT(600)
+    :running(true), SCREEN_WIDTH(1000), SCREEN_HEIGHT(600)
 {
     if(!init())
     {
@@ -17,11 +19,12 @@ Game::Game()
         renderer.loadFont(30);
         SDL_ShowCursor(SDL_DISABLE);
         //init sprites
-        const int edge = 50;
+        const int edge = 150;
         const int paddleY = SCREEN_HEIGHT/2-Paddle::HEIGHT/2;
         player1.init(edge, paddleY);
         player2.init(SCREEN_WIDTH-Paddle::WIDTH-edge, paddleY);
         ball.init(SCREEN_WIDTH/2-Ball::WIDTH/2, SCREEN_HEIGHT/2-Ball::HEIGHT/2);
+        Timer::start();
     }
 }
 
@@ -103,11 +106,14 @@ void Game::update()
 void Game::draw()
 {
     renderer.clear();
+    //sprites
     renderer.renderRect(player1.getRect());
     renderer.renderRect(player2.getRect());
     renderer.renderRect(ball.getRect());
-    SDL_Color color = {0xFF, 0xB5, 0x00, 0xFF};
-    std::string text = "this text";
-    renderer.renderText(text, 300, 10, color);
+    //ui elements
+    std::stringstream fps;
+    fps << Timer::getAvgFps();
+    SDL_Color color = {0xFF, 0xFF, 0x00, 0xFF};
+    renderer.renderText(fps.str(), 5, -10, color);
     renderer.present();
 }
