@@ -9,6 +9,7 @@ class Sprite
         void init(float _x, float _y);
         void update();
         inline SDL_Rect getRect() const {return rect;}
+        inline Vector2f getPos() const {return pos;}
     protected:
         SDL_Rect rect;
         Vector2f pos;

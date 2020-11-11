@@ -4,6 +4,7 @@
 #include <sstream>
 #include <string>
 #include "game.hpp"
+#include "collision.hpp"
 #include "timer.hpp"
 
 Game::Game()
@@ -24,6 +25,7 @@ Game::Game()
         player1.init(edge, paddleY);
         player2.init(SCREEN_WIDTH-Paddle::WIDTH-edge, paddleY);
         ball.init(SCREEN_WIDTH/2-Ball::WIDTH/2, SCREEN_HEIGHT/2-Ball::HEIGHT/2);
+        ball.randDir();
         Timer::start();
     }
 }
@@ -98,6 +100,48 @@ void Game::events()
 
 void Game::update()
 {
+    if(Collision::check(player1.getRect(), ball.getRect()))
+    {
+        //step back
+        ball.back();
+        std::cout << "collision detected\n";
+        int playerRight =  player1.getPos().x + player1.getRect().w;
+        //ball collided on top or bottom side of paddle
+        if(ball.getPos().x < playerRight)
+        {
+            if(ball.getPos().y < player1.getPos().y) //top
+            {
+                std::cout << "top\n";
+                ball.up();
+            }
+            else //bot
+            {
+                std::cout << "bot\n";
+                ball.down();
+            }
+        }
+        else //normal side collision
+        {
+            std::cout << "right\n";
+            ball.right();
+        }
+    }
+
+    ball.move();
+    int ballBottom = ball.getPos().y + ball.getRect().h;
+    if(ball.getPos().y < 0)
+    {
+        ball.down();
+    }
+    else if(ballBottom > SCREEN_HEIGHT)
+    {
+        ball.up();
+    }
+    else if(ball.getPos().x + ball.getRect().w > SCREEN_WIDTH)
+    {
+        ball.left();
+    }
+    //update rect with new positions
     player1.update();
     player2.update();
     ball.update();
