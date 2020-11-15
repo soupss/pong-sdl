@@ -2,6 +2,7 @@
 #define BALL_HPP
 #include <SDL2/SDL.h>
 #include "sprite.hpp"
+#include "vector2f.hpp"
 
 class Ball : public Sprite
 {
@@ -13,12 +14,12 @@ class Ball : public Sprite
         inline void down() {dir.y = 1;}
         inline void left() {dir.x = -1;}
         inline void right() {dir.x = 1;}
-        void move();
+        void move() override;
         void back();
         inline int GET_WIDTH() const override {return WIDTH;}
         inline int GET_HEIGHT() const override {return HEIGHT;}
     private:
         Vector2f dir;
-        const int speed = 5;
+        const int speed = 1;
 };
 #endif

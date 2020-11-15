@@ -16,6 +16,7 @@ class Game
         void draw();
     private:
         bool init();
+        void handleInput();
         bool running;
         const int SCREEN_WIDTH, SCREEN_HEIGHT;
         SDL_Window* window;

@@ -3,12 +3,13 @@
 #include <iostream>
 #include <sstream>
 #include <string>
+#include <stdint.h>
 #include "game.hpp"
 #include "collision.hpp"
 #include "timer.hpp"
 
 Game::Game()
-    :running(true), SCREEN_WIDTH(1000), SCREEN_HEIGHT(600)
+    :SCREEN_WIDTH(1000), SCREEN_HEIGHT(600)
 {
     if(!init())
     {
@@ -26,6 +27,7 @@ Game::Game()
         player2.init(SCREEN_WIDTH-Paddle::WIDTH-edge, paddleY);
         ball.init(SCREEN_WIDTH/2-Ball::WIDTH/2, SCREEN_HEIGHT/2-Ball::HEIGHT/2);
         ball.randDir();
+        running = true;
         Timer::start();
     }
 }
@@ -72,6 +74,27 @@ bool Game::init()
     return success;
 }
 
+void Game::handleInput()
+{
+    const unsigned char* keyState = SDL_GetKeyboardState(NULL);
+    if(keyState[SDL_SCANCODE_W] && keyState[SDL_SCANCODE_S])
+    {
+        player1.setVel(0);
+    }
+    else if(keyState[SDL_SCANCODE_W] && (player1.getPos().y > 0))
+    {
+        player1.setVel(-1);
+    }
+    else if(keyState[SDL_SCANCODE_S] && (player1.getPos().y + player1.getRect().h < SCREEN_HEIGHT))
+    {
+        player1.setVel(1);
+    }
+    else
+    {
+        player1.setVel(0);
+    }
+}
+
 void Game::events()
 {
     while(SDL_PollEvent(&event) != 0)
@@ -80,60 +103,45 @@ void Game::events()
         {
             running = false;
         }
-        else if(event.type == SDL_MOUSEMOTION){
-            int mouseY;
-            SDL_GetMouseState(NULL, &mouseY);
-            int playerY = mouseY-player1.GET_HEIGHT()/2;
-            const int bottom = SCREEN_HEIGHT - player1.GET_HEIGHT();
-            if(playerY < 0)
-            {
-                playerY = 0;
-            }
-            else if(playerY > bottom)
-            {
-                playerY = bottom;
-            }
-            player1.setY(playerY);
-        }
     }
+    handleInput();
 }
 
 void Game::update()
 {
-    if(Collision::check(player1.getRect(), ball.getRect()))
+    //collision
+    if(Collision::check(player1.getRect(),player1.getPos(), ball.getRect(), ball.getPos()))
     {
         //step back
         ball.back();
         std::cout << "collision detected\n";
         int playerRight =  player1.getPos().x + player1.getRect().w;
-        //ball collided on top or bottom side of paddle
+        //collide on bot or top of paddle
         if(ball.getPos().x < playerRight)
         {
-            if(ball.getPos().y < player1.getPos().y) //top
+            //top side
+            if(ball.getPos().y < player1.getPos().y) 
             {
-                std::cout << "top\n";
                 ball.up();
             }
-            else //bot
+            //bot side
+            else
             {
-                std::cout << "bot\n";
                 ball.down();
             }
         }
-        else //normal side collision
+        //right side
+        else
         {
-            std::cout << "right\n";
             ball.right();
         }
     }
-
-    ball.move();
-    int ballBottom = ball.getPos().y + ball.getRect().h;
+    //constraint ball
     if(ball.getPos().y < 0)
     {
         ball.down();
     }
-    else if(ballBottom > SCREEN_HEIGHT)
+    else if(ball.getPos().y + ball.getRect().h > SCREEN_HEIGHT)
     {
         ball.up();
     }
@@ -141,7 +149,10 @@ void Game::update()
     {
         ball.left();
     }
-    //update rect with new positions
+    ball.move();
+    //update sprite pos
+    player1.move();
+    //update rects with new positions
     player1.update();
     player2.update();
     ball.update();

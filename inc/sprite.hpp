@@ -7,6 +7,7 @@ class Sprite
 {
     public:
         void init(float _x, float _y);
+        virtual void move() = 0;
         void update();
         inline SDL_Rect getRect() const {return rect;}
         inline Vector2f getPos() const {return pos;}

@@ -1,6 +1,10 @@
 #include "paddle.hpp"
 
-void Paddle::setY(float _y)
+Paddle::Paddle()
+    :vel(0)
+{ }
+
+void Paddle::move()
 {
-    pos.y = _y;
+    pos.y += vel * speed;
 }

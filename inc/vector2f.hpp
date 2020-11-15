@@ -1,3 +1,5 @@
+#ifndef VECTOR2F_HPP
+#define VECTOR2F_HPP
 #include <iostream>
 
 struct Vector2f
@@ -17,3 +19,4 @@ struct Vector2f
 
     float x, y;
 };
+#endif

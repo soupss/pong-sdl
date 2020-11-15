@@ -11,7 +11,7 @@ all:	 BIN_DIR  := bin/debug
 all:     $(BIN)
 
 release: CPPFLAGS := -I $(INC_DIR) -MMD -MP
-release: CXXFLAGS := -Wall -Wpedantic -Ofast
+release: CXXFLAGS := -Wall -Wpedantic -Ofast -std=c++17
 release: LDFLAGS  :=
 release: LDLIBS   := -lSDL2 -lSDL2_image -lSDL2_ttf
 release: BIN_DIR  := bin/release
