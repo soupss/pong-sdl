@@ -17,6 +17,7 @@ class Game
     private:
         bool init();
         void handleInput();
+        void handleCollisions();
         bool running;
         const int SCREEN_WIDTH, SCREEN_HEIGHT;
         SDL_Window* window;
