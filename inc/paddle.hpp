@@ -10,7 +10,9 @@ class Paddle : public Sprite
         const static int WIDTH = 15, HEIGHT = 80;
         inline int GET_WIDTH() const override {return WIDTH;}
         inline int GET_HEIGHT() const override {return HEIGHT;}
-        inline void setVel(int _vel) {vel = _vel;}
+        inline void up() {vel = -1;}
+        inline void down() {vel = 1;}
+        inline void still() {vel = 0;}
         void move() override;
     private:
         int vel;

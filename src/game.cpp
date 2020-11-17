@@ -64,10 +64,10 @@ void Game::update()
     {
         ball.up();
     }
-    ball.move();
     //update sprite pos
     player1.move();
     player2.move();
+    ball.move();
     //update rects with new positions
     player1.update();
     player2.update();
@@ -85,7 +85,7 @@ void Game::draw()
     //fps
     std::stringstream fps;
     fps << Timer::getAvgFps();
-    SDL_Color color = {0xFF, 0xFF, 0x00, 0xFF};
+    SDL_Color color = {0xFF, 0xA5, 0x00, 0xFF};
     renderer.renderText(fps.str(), 5, -10, color);
     //middle line
     int midLineW = 5;
@@ -137,36 +137,36 @@ void Game::handleInput()
     //player1
     if(keyState[SDL_SCANCODE_W] && keyState[SDL_SCANCODE_S])
     {
-        player1.setVel(0);
+        player1.still();
     }
     else if(keyState[SDL_SCANCODE_W] && (player1.getPos().y > 0))
     {
-        player1.setVel(-1);
+        player1.up();
     }
     else if(keyState[SDL_SCANCODE_S] && (player1.getPos().y + player1.getRect().h < SCREEN_HEIGHT))
     {
-        player1.setVel(1);
+        player1.down();
     }
     else
     {
-        player1.setVel(0);
+        player1.still();
     }
     //player2
     if(keyState[SDL_SCANCODE_UP] && keyState[SDL_SCANCODE_DOWN])
     {
-        player2.setVel(0);
+        player2.still();
     }
     else if(keyState[SDL_SCANCODE_UP] && (player2.getPos().y > 0))
     {
-        player2.setVel(-1);
+        player2.up();
     }
     else if(keyState[SDL_SCANCODE_DOWN] && (player2.getPos().y + player2.getRect().h < SCREEN_HEIGHT))
     {
-        player2.setVel(1);
+        player2.down();
     }
     else
     {
-        player2.setVel(0);
+        player2.still();
     }
 }
 

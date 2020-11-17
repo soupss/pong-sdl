@@ -81,7 +81,7 @@ void Renderer::renderText(std::string _text, int _x, int _y, SDL_Color _color)
 
 void Renderer::clear()
 {
-    SDL_SetRenderDrawColor(renderer, 0x00, 0x00, 0xCC, 0xCC);
+    SDL_SetRenderDrawColor(renderer, 0x00, 0x5A, 0xFF, 0xCC);
     SDL_RenderClear(renderer);
 }
 
