@@ -9,7 +9,7 @@
 #include "timer.hpp"
 
 Game::Game()
-    :SCREEN_WIDTH(1000), SCREEN_HEIGHT(600)
+    :SCREEN_WIDTH(1100), SCREEN_HEIGHT(600)
 {
     if(!init())
     {
@@ -21,7 +21,7 @@ Game::Game()
         renderer.loadFont(30);
         SDL_ShowCursor(SDL_DISABLE);
         //init sprites
-        const int edge = 150;
+        const int edge = 80;
         const int paddleY = SCREEN_HEIGHT/2-Paddle::HEIGHT/2;
         player1.init(edge, paddleY);
         player2.init(SCREEN_WIDTH-Paddle::WIDTH-edge, paddleY);
@@ -120,14 +120,16 @@ void Game::update()
         if(ball.getPos().x < playerRight)
         {
             //top side
-            if(ball.getPos().y < player1.getPos().y) 
+            if(ball.getPos().y < player1.getPos().y)
             {
                 ball.up();
+                ball.setY(player1.getPos().y - ball.getRect().h);
             }
             //bot side
             else
             {
                 ball.down();
+                ball.setY(player1.getPos().y + player1.getRect().h);
             }
         }
         //right side
@@ -166,9 +168,17 @@ void Game::draw()
     renderer.renderRect(player2.getRect());
     renderer.renderRect(ball.getRect());
     //ui elements
+    //fps
     std::stringstream fps;
     fps << Timer::getAvgFps();
     SDL_Color color = {0xFF, 0xFF, 0x00, 0xFF};
     renderer.renderText(fps.str(), 5, -10, color);
+    //middle line
+    int midLineW = 5;
+    SDL_Rect midRect = { (SCREEN_WIDTH / 2) - (midLineW / 2),
+                     0,
+                     midLineW,
+                     SCREEN_HEIGHT };
+    renderer.renderRect(midRect);
     renderer.present();
 }
