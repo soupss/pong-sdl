@@ -1,20 +1,21 @@
 ## Requirements
 
 * SDL 2
-* SDL_image 2
+* SDL_mixer 2
+* SDL_ttf 2
 
 ## Installation
 
 #### Debian Based Distros
 
 ```
-$ sudo apt-get install libsdl2 libsdl2-image
+$ sudo apt-get install libsdl2 libsdl2-mixer libsdl2-ttf
 ```
 
 #### Arch Based Distros
 
 ```
-$ sudo pacman -S sdl2 sdl2_image
+$ sudo pacman -S sdl2 sdl2_mixer sdl2_ttf
 ```
 
 For more help see

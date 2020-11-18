@@ -1,4 +1,4 @@
-#include <SDL2/SDL_image.h>
+#include <SDL2/SDL_mixer.h>
 #include <SDL2/SDL_ttf.h>
 #include <iostream>
 #include <sstream>
@@ -22,6 +22,7 @@ Game::Game()
         renderer.init(window);
         renderer.loadFont(50);
         SDL_ShowCursor(SDL_DISABLE);
+        sound.init();
         //init sprites
         const int edge = 80;
         const int paddleY = SCREEN_HEIGHT/2-Paddle::HEIGHT/2;
@@ -39,7 +40,7 @@ Game::~Game()
 {
     SDL_DestroyWindow(window);
     TTF_Quit();
-    IMG_Quit();
+    Mix_Quit();
     SDL_Quit();
 }
 
@@ -66,10 +67,12 @@ void Game::update()
     if(ball.getPos().y < 0)
     {
         ball.down();
+        sound.playBoing();
     }
     else if(ball.getPos().y + ball.getRect().h > SCREEN_HEIGHT)
     {
         ball.up();
+        sound.playBoing();
     }
     //ball
     int ballX = SCREEN_WIDTH / 2 - ball.getRect().w / 2;
@@ -79,12 +82,14 @@ void Game::update()
         ++p2_score;
         ball.randDir();
         ball.respawn(ballX, ballY);
+        sound.playScore();
     }
     else if(ball.getPos().x > SCREEN_WIDTH)
     {
         ++p1_score;
         ball.randDir();
         ball.respawn(ballX, ballY);
+        sound.playScore();
     }
     //update sprite pos
     player1.move();
@@ -127,7 +132,7 @@ void Game::draw()
 bool Game::init()
 {
     bool success = true;
-    if(SDL_Init(SDL_INIT_VIDEO) != 0)
+    if(SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO) != 0)
     {
         std::cerr << "SDL_Init error: " << SDL_GetError() << std::endl;
         success = false;
@@ -143,9 +148,9 @@ bool Game::init()
         else
         {
             //libs
-            if(!(IMG_Init(IMG_INIT_PNG) & IMG_INIT_PNG))
+            if(Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048) != 0)
             {
-                std::cerr << "IMG_Init error: " << IMG_GetError() << std::endl;
+                std::cerr << "Mix_OpenAudio error: " << Mix_GetError() << std::endl;
                 success = false;
             }
             if(TTF_Init() == -1)
@@ -202,6 +207,7 @@ void Game::handleCollisions()
     //player1-ball
     if(Collision::check(player1.getRect(),player1.getPos(), ball.getRect(), ball.getPos()))
     {
+        sound.playBoing();
         //step back
         ball.back();
         //collide on bot or top of paddle
@@ -240,6 +246,7 @@ void Game::handleCollisions()
     //player2-ball
     if(Collision::check(player2.getRect(),player2.getPos(), ball.getRect(), ball.getPos()))
     {
+        sound.playBoing();
         //step back
         ball.back();
         //collide on bot or top of paddle
@@ -279,5 +286,16 @@ void Game::handleCollisions()
 
 void Game::togglePause()
 {
-    paused = (!paused) ? true : false;
+    if(!paused)
+    {
+        //pause
+        sound.playPause();
+        paused = true;
+    }
+    else
+    {
+        //unpause
+        sound.playUnpause();
+        paused = false;
+    }
 }

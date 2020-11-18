@@ -4,6 +4,7 @@
 #include "renderer.hpp"
 #include "paddle.hpp"
 #include "ball.hpp"
+#include "sound.hpp"
 
 class Game
 {
@@ -25,6 +26,7 @@ class Game
         bool paused;
         SDL_Window* window;
         Renderer renderer;
+        Sound sound;
         SDL_Event event;
         Paddle player1;
         Paddle player2;

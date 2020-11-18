@@ -6,14 +6,14 @@ BIN := main
 all:     CPPFLAGS := -I $(INC_DIR) -MMD -MP
 all:     CXXFLAGS := -Wall -Wpedantic -g -std=c++17
 all:     LDFLAGS  :=
-all:     LDLIBS   := -lSDL2 -lSDL2_image -lSDL2_ttf
+all:     LDLIBS   := -lSDL2 -lSDL2_ttf -lSDL2_mixer
 all:	 BIN_DIR  := bin/debug
 all:     $(BIN)
 
 release: CPPFLAGS := -I $(INC_DIR) -MMD -MP
 release: CXXFLAGS := -Wall -Wpedantic -Ofast -std=c++17
 release: LDFLAGS  :=
-release: LDLIBS   := -lSDL2 -lSDL2_image -lSDL2_ttf
+release: LDLIBS   := -lSDL2 -lSDL2_ttf -lSDL2_mixer
 release: BIN_DIR  := bin/release
 release: $(BIN)
 
