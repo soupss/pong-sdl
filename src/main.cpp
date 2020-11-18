@@ -7,7 +7,10 @@ int main(int argc, char* argv[])
     while(game.isRunning())
     {
         game.events();
-        game.update();
+        if(!game.isPaused())
+        {
+            game.update();
+        }
         game.draw();
         //to calculate fps
         Timer::countFrame();

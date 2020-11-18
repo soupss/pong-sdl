@@ -11,6 +11,7 @@ class Game
         Game();
         ~Game();
         inline bool isRunning() const {return running;}
+        inline bool isPaused() const {return paused;}
         void events();
         void update();
         void draw();
@@ -18,8 +19,10 @@ class Game
         bool init();
         void handleInput();
         void handleCollisions();
-        bool running;
+        void togglePause();
         const int SCREEN_WIDTH, SCREEN_HEIGHT;
+        bool running;
+        bool paused;
         SDL_Window* window;
         Renderer renderer;
         SDL_Event event;

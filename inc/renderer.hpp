@@ -14,7 +14,7 @@ class Renderer
         void loadFont(int _size);
         void renderRect(SDL_Rect _rect);
         void renderTexture(SDL_Texture* _texture, SDL_Rect _rect);
-        void renderText(std::string _text, int _x, int _y, SDL_Color _color);
+        void renderText(std::string _text, int _x, int _y, SDL_Color _color={0xFF, 0xFF, 0xFF, 0xFF});
         void clear();
         void present();
     private:

@@ -9,7 +9,7 @@
 #include "timer.hpp"
 
 Game::Game()
-    :SCREEN_WIDTH(1100), SCREEN_HEIGHT(600), p1_score(0), p2_score(0)
+    :SCREEN_WIDTH(1100), SCREEN_HEIGHT(600),  paused(true), p1_score(0), p2_score(0)
 {
     if(!init())
     {
@@ -29,6 +29,7 @@ Game::Game()
         ball.randDir();
         running = true;
         Timer::start();
+        update();
     }
 }
 
@@ -47,6 +48,10 @@ void Game::events()
         if(event.type == SDL_QUIT)
         {
             running = false;
+        }
+        if(event.type == SDL_KEYDOWN && event.key.keysym.sym == SDLK_SPACE)
+        {
+            togglePause();
         }
     }
     handleInput();
@@ -105,8 +110,13 @@ void Game::draw()
     //score
     std::stringstream score;
     score << p1_score << " " << p2_score;
-    SDL_Color white = {0xFF, 0xFF, 0xFF, 0xFF};
-    renderer.renderText(score.str(), SCREEN_WIDTH / 2, 50, white);
+    renderer.renderText(score.str(), SCREEN_WIDTH / 2, 50);
+    //paused
+    if(paused)
+    {
+        renderer.renderText("paused", SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2 - 60);
+        renderer.renderText("(space to unpause)", SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2 + 45);
+    }
     renderer.present();
 }
 
@@ -239,4 +249,9 @@ void Game::handleCollisions()
             ball.left();
         }
     }
+}
+
+void Game::togglePause()
+{
+    paused = (!paused) ? true : false;
 }
