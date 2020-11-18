@@ -25,3 +25,9 @@ void Ball::back()
     pos.x -= speed * dir.x;
     pos.y -= speed * dir.y;
 }
+
+void Ball::respawn(int _x, int _y)
+{
+    pos.x = _x;
+    pos.y = _y;
+}

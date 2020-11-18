@@ -9,7 +9,7 @@
 #include "timer.hpp"
 
 Game::Game()
-    :SCREEN_WIDTH(1100), SCREEN_HEIGHT(600)
+    :SCREEN_WIDTH(1100), SCREEN_HEIGHT(600), p1_score(0), p2_score(0)
 {
     if(!init())
     {
@@ -18,7 +18,7 @@ Game::Game()
     else
     {
         renderer.init(window);
-        renderer.loadFont(30);
+        renderer.loadFont(50);
         SDL_ShowCursor(SDL_DISABLE);
         //init sprites
         const int edge = 80;
@@ -64,6 +64,21 @@ void Game::update()
     {
         ball.up();
     }
+    //ball
+    int ballX = SCREEN_WIDTH / 2 - ball.getRect().w / 2;
+    int ballY = SCREEN_HEIGHT / 2 - ball.getRect().h / 2;
+    if(ball.getPos().x + ball.getRect().w < 0)
+    {
+        ++p2_score;
+        ball.randDir();
+        ball.respawn(ballX, ballY);
+    }
+    else if(ball.getPos().x > SCREEN_WIDTH)
+    {
+        ++p1_score;
+        ball.randDir();
+        ball.respawn(ballX, ballY);
+    }
     //update sprite pos
     player1.move();
     player2.move();
@@ -85,15 +100,13 @@ void Game::draw()
     //fps
     std::stringstream fps;
     fps << Timer::getAvgFps();
-    SDL_Color color = {0xFF, 0xA5, 0x00, 0xFF};
-    renderer.renderText(fps.str(), 5, -10, color);
-    //middle line
-    int midLineW = 5;
-    SDL_Rect midRect = { (SCREEN_WIDTH / 2) - (midLineW / 2),
-                     0,
-                     midLineW,
-                     SCREEN_HEIGHT };
-    renderer.renderRect(midRect);
+    SDL_Color orange = {0xFF, 0xA5, 0x00, 0xFF};
+    renderer.renderText(fps.str(), 60, 20, orange);
+    //score
+    std::stringstream score;
+    score << p1_score << " " << p2_score;
+    SDL_Color white = {0xFF, 0xFF, 0xFF, 0xFF};
+    renderer.renderText(score.str(), SCREEN_WIDTH / 2, 50, white);
     renderer.present();
 }
 

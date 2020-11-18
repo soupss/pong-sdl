@@ -75,7 +75,8 @@ void Renderer::renderText(std::string _text, int _x, int _y, SDL_Color _color)
     SDL_Rect rect;
     int w,h;
     SDL_QueryTexture(texture, NULL, NULL, &w, &h);
-    rect = {_x, _y, w, h};
+    //centered
+    rect = {_x - w/2, _y - h/2, w, h};
     renderTexture(texture, rect);
 }
 

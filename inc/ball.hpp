@@ -17,6 +17,7 @@ class Ball : public Sprite
         inline void right() {dir.x = 1;}
         void move() override;
         void back();
+        void respawn(int _x, int _y);
         inline int GET_WIDTH() const override {return WIDTH;}
         inline int GET_HEIGHT() const override {return HEIGHT;}
     private:

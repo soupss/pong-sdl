@@ -25,6 +25,8 @@ class Game
         SDL_Event event;
         Paddle player1;
         Paddle player2;
+        int p1_score;
+        int p2_score;
         Ball ball;
 };
 #endif
