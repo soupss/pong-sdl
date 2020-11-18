@@ -8,6 +8,8 @@
 #include "collision.hpp"
 #include "timer.hpp"
 
+//public
+
 Game::Game()
     :SCREEN_WIDTH(1100), SCREEN_HEIGHT(600),  paused(true), p1_score(0), p2_score(0)
 {
@@ -120,6 +122,8 @@ void Game::draw()
     renderer.present();
 }
 
+//private
+
 bool Game::init()
 {
     bool success = true;
@@ -207,12 +211,14 @@ void Game::handleCollisions()
             if(ball.getPos().y < player1.getPos().y)
             {
                 ball.up();
+                ball.move();
                 ball.setY(player1.getPos().y - ball.getRect().h);
             }
             //bot side
             else
             {
                 ball.down();
+                ball.move();
                 ball.setY(player1.getPos().y + player1.getRect().h);
             }
         }
