@@ -82,14 +82,12 @@ void Game::update()
         ++p2_score;
         ball.randDir();
         ball.respawn(ballX, ballY);
-        sound.playScore();
     }
     else if(ball.getPos().x > SCREEN_WIDTH)
     {
         ++p1_score;
         ball.randDir();
         ball.respawn(ballX, ballY);
-        sound.playScore();
     }
     //update sprite pos
     player1.move();
@@ -116,7 +114,7 @@ void Game::draw()
     renderer.renderText(fps.str(), 60, 20, orange);
     //score
     std::stringstream score;
-    score << p1_score << " " << p2_score;
+    score << p1_score << "   " << p2_score;
     renderer.renderText(score.str(), SCREEN_WIDTH / 2, 50);
     //paused
     if(paused)
@@ -289,13 +287,11 @@ void Game::togglePause()
     if(!paused)
     {
         //pause
-        sound.playPause();
         paused = true;
     }
     else
     {
         //unpause
-        sound.playUnpause();
         paused = false;
     }
 }
