@@ -14,6 +14,7 @@ class Paddle : public Sprite
         inline void down() {vel = 1;}
         inline void still() {vel = 0;}
         void move() override;
+        inline int getVel() const {return vel;}
     private:
         int vel;
         const int speed = 5;

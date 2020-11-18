@@ -226,6 +226,15 @@ void Game::handleCollisions()
         else
         {
             ball.right();
+            //curve ball
+            if(player1.getVel() == -1)
+            {
+                ball.up();
+            }
+            else if(player1.getVel() == 1)
+            {
+                ball.down();
+            }
         }
     }
     //player2-ball
@@ -240,12 +249,14 @@ void Game::handleCollisions()
             if(ball.getPos().y < player2.getPos().y)
             {
                 ball.up();
+                ball.move();
                 ball.setY(player2.getPos().y - ball.getRect().h);
             }
             //bot side
             else
             {
                 ball.down();
+                ball.move();
                 ball.setY(player2.getPos().y + player2.getRect().h);
             }
         }
@@ -253,6 +264,15 @@ void Game::handleCollisions()
         else
         {
             ball.left();
+            //curve ball
+            if(player2.getVel() == -1)
+            {
+                ball.up();
+            }
+            else if(player2.getVel() == 1)
+            {
+                ball.down();
+            }
         }
     }
 }

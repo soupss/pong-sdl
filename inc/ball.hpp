@@ -22,6 +22,6 @@ class Ball : public Sprite
         inline int GET_HEIGHT() const override {return HEIGHT;}
     private:
         Vector2f dir;
-        const int speed = 3;
+        const int speed = 4;
 };
 #endif
