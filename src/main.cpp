@@ -1,6 +1,5 @@
 #include <iostream>
 #include "statehandler.hpp"
-#include "states.hpp"
 
 SDL_Window* window = nullptr;
 int SCREEN_WIDTH = 1100;
