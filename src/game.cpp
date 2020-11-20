@@ -7,6 +7,7 @@
 #include "game.hpp"
 #include "collision.hpp"
 #include "timer.hpp"
+#include "sound.hpp"
 
 //public
 
@@ -22,7 +23,7 @@ Game::Game()
         renderer.init(window);
         renderer.loadFont(50);
         SDL_ShowCursor(SDL_DISABLE);
-        sound.init();
+        Sound::load();
         //init sprites
         const int edge = 80;
         const int paddleY = SCREEN_HEIGHT/2-Paddle::HEIGHT/2;
@@ -67,12 +68,12 @@ void Game::update()
     if(ball.getPos().y < 0)
     {
         ball.down();
-        sound.playBoing();
+        Sound::playBoing();
     }
     else if(ball.getPos().y + ball.getRect().h > SCREEN_HEIGHT)
     {
         ball.up();
-        sound.playBoing();
+        Sound::playBoing();
     }
     //ball
     int ballX = SCREEN_WIDTH / 2 - ball.getRect().w / 2;
@@ -205,7 +206,7 @@ void Game::handleCollisions()
     //player1-ball
     if(Collision::check(player1.getRect(),player1.getPos(), ball.getRect(), ball.getPos()))
     {
-        sound.playBoing();
+        Sound::playBoing();
         //step back
         ball.back();
         //collide on bot or top of paddle
@@ -244,7 +245,7 @@ void Game::handleCollisions()
     //player2-ball
     if(Collision::check(player2.getRect(),player2.getPos(), ball.getRect(), ball.getPos()))
     {
-        sound.playBoing();
+        Sound::playBoing();
         //step back
         ball.back();
         //collide on bot or top of paddle

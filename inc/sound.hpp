@@ -5,12 +5,12 @@
 class Sound
 {
     public:
-        ~Sound();
-        void init();
-        void playBoing();
-
+        static void load();
+        static void free();
+        static void playBoing();
     private:
-        Mix_Chunk* boing1;
-        Mix_Chunk* boing2;
-        Mix_Chunk* boing3;
+        static Mix_Chunk* boing1;
+        static Mix_Chunk* boing2;
+        static Mix_Chunk* boing3;
+};
 #endif
