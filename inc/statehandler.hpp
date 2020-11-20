@@ -1,7 +1,19 @@
 #ifndef STATEHANDLER_HPP
 #define STATEHANDLER_HPP
 #include "gamestate.hpp"
-#include "states.hpp"
+
+namespace States
+{
+    enum States
+    {
+        NULLSTATE,
+        TITLE,
+        MENU,
+        PLAYING,
+        PAUSED,
+        QUIT
+    };
+}
 
 class StateHandler
 {

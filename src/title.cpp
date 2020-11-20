@@ -1,8 +1,6 @@
 #include <SDL2/SDL.h>
-#include <iostream>
 #include "title.hpp"
 #include "statehandler.hpp"
-#include "states.hpp"
 
 void Title::events()
 {
