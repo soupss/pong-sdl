@@ -32,7 +32,7 @@ For more help see
   $ make
   ```
 
-*or*
+or
 
 * **Release** (You probably want this)
 
