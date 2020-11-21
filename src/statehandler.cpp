@@ -1,5 +1,5 @@
-#include <iostream>
 #include "statehandler.hpp"
+#include <iostream>
 #include "title.hpp"
 #include "menu.hpp"
 
