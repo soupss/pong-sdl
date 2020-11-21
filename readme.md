@@ -1,10 +1,10 @@
-## Requirements
+# Requirements
 
 * SDL 2
 * SDL_mixer 2
 * SDL_ttf 2
 
-## Installation
+# Installation
 
 #### Debian Based Distros
 
@@ -22,7 +22,7 @@ For more help see
 * The official website: https://wiki.libsdl.org/Installation
 * LazyFoo's installation guide: https://lazyfoo.net/tutorials/SDL/01_hello_SDL/index.php
 
-## Usage
+# Usage
 
 #### 1. Build with makefile
 
