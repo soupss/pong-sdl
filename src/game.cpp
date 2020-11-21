@@ -1,6 +1,7 @@
 #include "game.hpp"
 #include <iostream>
 #include "statehandler.hpp"
+#include "renderer.hpp"
 
 Game::Game()
     :SCREEN_WIDTH(1100), SCREEN_HEIGHT(600)
@@ -11,6 +12,8 @@ Game::Game()
     }
     else
     {
+        //prepare
+        Renderer::create(window);
         //set the first state and change to it
         StateHandler::setNextState(States::TITLE);
         StateHandler::changeState();
@@ -27,6 +30,7 @@ void Game::run()
         //change state if needed
         StateHandler::changeState();
     }
+    quit();
 }
 
 bool Game::init()
@@ -51,4 +55,11 @@ bool Game::init()
         }
     }
     return success;
+}
+
+void Game::quit()
+{
+    Renderer::destroy();
+    SDL_DestroyWindow(window);
+    SDL_Quit();
 }

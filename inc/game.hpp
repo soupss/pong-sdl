@@ -8,7 +8,8 @@ class Game
         Game(); //prepare game variables
         void run(); //start the game loop
     private:
-        bool init(); //initialize SDL and SDL libs
+        void quit(); //free memory and quit sdl+sdl libs
+        bool init(); //initialize sdl+sdl libs
         SDL_Window* window; //defined in Game::init()
         const int SCREEN_WIDTH, SCREEN_HEIGHT;
 };
