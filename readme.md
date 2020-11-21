@@ -26,19 +26,21 @@ For more help see
 
 #### 1. Build with makefile
 
-Debug
+* **Debug**
 
-```
-$ make
-```
+  ```
+  $ make
+  ```
 
-Release (You probably want this)
+*or*
 
-```
-$ make release
-```
+* **Release** (You probably want this)
 
-The executable is located at *bin/debug/main* and *bin/release/main* respectively
+  ```
+  $ make release
+  ```
+
+(The binary gets created at *bin/debug/main* and *bin/release/main* respectively)
 
 #### 2. Run
 
