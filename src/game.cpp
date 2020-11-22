@@ -20,6 +20,14 @@ Game::Game()
     }
 }
 
+Game::~Game()
+{
+    Renderer::destroy();
+    SDL_DestroyWindow(window);
+    TTF_Quit();
+    SDL_Quit();
+}
+
 void Game::run()
 {
     while(StateHandler::getCurrentStateID() != States::QUIT)
@@ -30,7 +38,21 @@ void Game::run()
         //change state if needed
         StateHandler::changeState();
     }
-    quit();
+}
+
+TTF_Font* Game::loadFont(int _size)
+{
+    TTF_Font* loadedFont;
+    loadedFont = TTF_OpenFont("res/fonts/bpdots.unicasesquare-bold.otf", _size);
+    if(!loadedFont)
+    {
+        std::cerr << "Error loading font: " << TTF_GetError() << std::endl;
+    }
+    return loadedFont;
+}
+ void Game::destroyFont(TTF_Font* _font)
+{
+    TTF_CloseFont(_font);
 }
 
 bool Game::init()
@@ -52,14 +74,12 @@ bool Game::init()
         else
         {
             //libs
+            if(TTF_Init() == -1)
+            {
+                std::cerr << "TTF_Init error: " << TTF_GetError() << std::endl;
+                success = false;
+            }
         }
     }
     return success;
-}
-
-void Game::quit()
-{
-    Renderer::destroy();
-    SDL_DestroyWindow(window);
-    SDL_Quit();
 }
