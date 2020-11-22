@@ -57,29 +57,23 @@ TTF_Font* Game::loadFont(int _size)
 
 bool Game::init()
 {
-    bool success = true;
     if(SDL_Init(SDL_INIT_VIDEO) != 0)
     {
         std::cerr << "SDL_Init error: " << SDL_GetError() << std::endl;
-        success = false;
+        return false;
     }
-    else
+    window = SDL_CreateWindow("Pong", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, 0);
+    if(window == NULL)
     {
-        window = SDL_CreateWindow("Pong", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, 0);
-        if(window == NULL)
-        {
-            std::cerr << "Error creating window: " << SDL_GetError() << std::endl;
-            success = false;
-        }
-        else
-        {
-            //libs
-            if(TTF_Init() == -1)
-            {
-                std::cerr << "TTF_Init error: " << TTF_GetError() << std::endl;
-                success = false;
-            }
-        }
+        std::cerr << "Error creating window: " << SDL_GetError() << std::endl;
+        return false;
     }
-    return success;
+    //libs
+    if(TTF_Init() == -1)
+    {
+        std::cerr << "TTF_Init error: " << TTF_GetError() << std::endl;
+        return false;
+    }
+    //init success
+    return true;
 }
