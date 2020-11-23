@@ -7,7 +7,7 @@ class Title : public GameState
 {
     public:
         Title();
-        ~Title();
+        ~Title() override;
         void events() override;
         void update() override;
         void render() override;

@@ -6,7 +6,7 @@
 
 Title::Title()
 {
-    font = Game::loadFont(50);
+    font = Game::loadFont(120);
 }
 
 Title::~Title()
@@ -23,7 +23,7 @@ void Title::events()
             StateHandler::setNextState(States::QUIT);
         }
         //if enter or space is pressed
-        if(event.type == SDL_KEYDOWN &&
+        else if(event.type == SDL_KEYDOWN &&
                 (event.key.keysym.sym == SDLK_RETURN || event.key.keysym.sym == SDLK_SPACE))
         {
             StateHandler::setNextState(States::MENU);
@@ -32,12 +32,12 @@ void Title::events()
 }
 
 void Title::update()
-{
-}
+{ }
 
 void Title::render()
 {
-    Renderer::clear(0, 0, 255);
-    Renderer::renderText(font, "aaa", 100, 100);
+    const SDL_Color c = Colors::DARK_BACKGROUND;
+    Renderer::clear(c.r, c.g, c.b);
+    Renderer::renderText(font, "Pong", (Game::GET_SCREEN_WIDTH() / 2), (Game::GET_SCREEN_HEIGHT() / 2));
     Renderer::present();
 }

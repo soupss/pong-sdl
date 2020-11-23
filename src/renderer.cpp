@@ -38,7 +38,9 @@ void Renderer::renderText(TTF_Font* _font, std::string _text, int _x, int _y, SD
         }
         else
         {
-            SDL_Rect rect = {_x, _y, surface->w, surface->h};
+            int w = surface->w;
+            int h = surface->h;
+            SDL_Rect rect = {_x - w/2, _y - h/2, w, h};
             renderTexture(texture, &rect);
         }
     }

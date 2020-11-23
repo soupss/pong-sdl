@@ -4,7 +4,6 @@
 #include "renderer.hpp"
 
 Game::Game()
-    :SCREEN_WIDTH(1100), SCREEN_HEIGHT(600)
 {
     if(!init())
     {
@@ -34,9 +33,9 @@ void Game::run()
     {
         StateHandler::getCurrentState()->events();
         StateHandler::getCurrentState()->update();
-        StateHandler::getCurrentState()->render();
         //change state if needed
         StateHandler::changeState();
+        StateHandler::getCurrentState()->render();
     }
 }
 
@@ -50,7 +49,8 @@ TTF_Font* Game::loadFont(int _size)
     }
     return loadedFont;
 }
- void Game::destroyFont(TTF_Font* _font)
+
+void Game::destroyFont(TTF_Font* _font)
 {
     TTF_CloseFont(_font);
 }

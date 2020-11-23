@@ -1,5 +1,6 @@
 #ifndef STATEHANDLER_HPP
 #define STATEHANDLER_HPP
+#include <string>
 #include "gamestate.hpp"
 
 namespace States
@@ -10,7 +11,6 @@ namespace States
         TITLE,
         MENU,
         PLAYING,
-        PAUSED,
         QUIT
     };
 }
