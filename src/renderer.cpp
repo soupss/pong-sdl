@@ -15,6 +15,13 @@ void Renderer::destroy()
     SDL_DestroyRenderer(renderer);
 }
 
+void Renderer::renderRect(SDL_Rect* _rect)
+{
+    SDL_Color c = Colors::FOREGROUND;
+    SDL_SetRenderDrawColor(renderer, c.r, c.g, c.b, c.a);
+    SDL_RenderFillRect(renderer, _rect);
+}
+
 void Renderer::renderTexture(SDL_Texture* _texture, SDL_Rect* _rect)
 {
     SDL_RenderCopy(renderer, _texture, nullptr, _rect);
@@ -49,7 +56,6 @@ void Renderer::renderText(TTF_Font* _font, std::string _text, int _x, int _y, SD
 
 void Renderer::clear(int _r, int _g, int _b, int _a)
 {
-    //blue
     SDL_SetRenderDrawColor(renderer, _r, _g, _b, _a);
     SDL_RenderClear(renderer);
 }

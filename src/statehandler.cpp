@@ -2,6 +2,7 @@
 #include <iostream>
 #include "title.hpp"
 #include "menu.hpp"
+#include "playing.hpp"
 
 void StateHandler::setNextState(int _nextStateID)
 {
@@ -27,6 +28,9 @@ void StateHandler::changeState()
                 break;
             case States::MENU:
                 currentState = new Menu();
+                break;
+            case States::PLAYING:
+                currentState = new Playing();
                 break;
         }
         currentStateID = nextStateID;

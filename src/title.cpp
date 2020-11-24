@@ -1,8 +1,9 @@
 #include "title.hpp"
 #include <SDL2/SDL.h>
+#include "game.hpp"
 #include "statehandler.hpp"
 #include "renderer.hpp"
-#include "game.hpp"
+#include "colors.hpp"
 
 Title::Title()
 {
@@ -36,8 +37,8 @@ void Title::update()
 
 void Title::render()
 {
-    const SDL_Color c = Colors::DARK_BACKGROUND;
-    Renderer::clear(c.r, c.g, c.b);
+    const SDL_Color bg = Colors::DARK_BACKGROUND;
+    Renderer::clear(bg.r, bg.g, bg.b);
     Renderer::renderText(font, "Pong", (Game::GET_SCREEN_WIDTH() / 2), (Game::GET_SCREEN_HEIGHT() / 2));
     Renderer::present();
 }

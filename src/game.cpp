@@ -32,9 +32,9 @@ void Game::run()
     while(StateHandler::getCurrentStateID() != States::QUIT)
     {
         StateHandler::getCurrentState()->events();
-        StateHandler::getCurrentState()->update();
         //change state if needed
         StateHandler::changeState();
+        StateHandler::getCurrentState()->update();
         StateHandler::getCurrentState()->render();
     }
 }

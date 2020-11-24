@@ -1,9 +1,10 @@
 #include "menu.hpp"
 #include <SDL2/SDL.h>
 #include <iostream>
-#include "statehandler.hpp"
 #include "game.hpp"
+#include "statehandler.hpp"
 #include "renderer.hpp"
+#include "colors.hpp"
 
 Menu::Menu()
     :selected(0)
@@ -40,7 +41,7 @@ void Menu::events()
                     switch(selected)
                     {
                         case 0: //play
-                            StateHandler::setNextState(States::TITLE);
+                            StateHandler::setNextState(States::PLAYING);
                             break;
                         case 1: //quit
                             StateHandler::setNextState(States::QUIT);
@@ -57,8 +58,8 @@ void Menu::update()
 
 void Menu::render()
 {
-    const SDL_Color c = Colors::BACKGROUND;
-    Renderer::clear(c.r, c.g, c.b);
+    const SDL_Color bg = Colors::BACKGROUND;
+    Renderer::clear(bg.r, bg.g, bg.b);
     const int spaceBetweenOptions = 100;
     //render options
     for(int i = 0;i<(int)MENU_OPTIONS.size();++i)
