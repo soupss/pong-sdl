@@ -5,6 +5,7 @@
 #include "renderer.hpp"
 #include "colors.hpp"
 #include "paddle.hpp"
+#include "ball.hpp"
 
 Playing::Playing()
 {
@@ -14,6 +15,7 @@ Playing::Playing()
     //define sprites
     player1 = new Paddle(spacing, paddleY);
     player2 = new Paddle(Game::GET_SCREEN_WIDTH() - Paddle::WIDTH - spacing, paddleY);
+    ball = new Ball(Game::GET_SCREEN_WIDTH() / 2 - Ball::WIDTH / 2, Game::GET_SCREEN_HEIGHT() / 2 - Ball::HEIGHT / 2);
 }
 
 Playing::~Playing()
@@ -21,6 +23,7 @@ Playing::~Playing()
     Game::destroyFont(font);
     delete player1;
     delete player2;
+    delete ball;
 }
 
 void Playing::events()
@@ -31,15 +34,23 @@ void Playing::events()
         {
             StateHandler::setNextState(States::QUIT);
         }
+        //change paddle vel
+        //TODO:input
     }
 }
 
 void Playing::update()
 {
+    //change ball vel
+    //TODO:ball movement
+    //calculate sprite pos from vel
     player1->move();
     player2->move();
+    ball->move();
+    //update sprite rect with new pos
     player1->update();
     player2->update();
+    ball->update();
 }
 
 void Playing::render()
@@ -48,5 +59,6 @@ void Playing::render()
     Renderer::clear(bg.r, bg.g, bg.b);
     Renderer::renderRect(player1->getRect());
     Renderer::renderRect(player2->getRect());
+    Renderer::renderRect(ball->getRect());
     Renderer::present();
 }

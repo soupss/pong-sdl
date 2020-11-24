@@ -18,5 +18,6 @@ class Playing : public GameState
         //defined in Playing::Playing()
         Sprite* player1;
         Sprite* player2;
+        Sprite* ball;
 };
 #endif

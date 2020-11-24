@@ -1,6 +1,6 @@
-#include "paddle.hpp"
+#include "ball.hpp"
 
-Paddle::Paddle(float _x, float _y)
+Ball::Ball(float _x, float _y)
 {
     vel.x = 0;
     vel.y = 0;
@@ -10,10 +10,11 @@ Paddle::Paddle(float _x, float _y)
     rect = {0, 0, WIDTH, HEIGHT};
 }
 
-Paddle::~Paddle()
+Ball::~Ball()
 { }
 
-void Paddle::move()
+void Ball::move()
 {
-    pos.y += vel.y * speed;
+    pos.x += speed * vel.x;
+    pos.y += speed * vel.y;
 }
