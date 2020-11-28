@@ -2,9 +2,9 @@
 
 void Sound::load()
 {
-    boing1 = Mix_LoadWAV("assets/sfx/boing1.wav");
-    boing2 = Mix_LoadWAV("assets/sfx/boing2.wav");
-    boing3 = Mix_LoadWAV("assets/sfx/boing3.wav");
+    boing1 = Mix_LoadWAV("res/sfx/boing1.wav");
+    boing2 = Mix_LoadWAV("res/sfx/boing2.wav");
+    boing3 = Mix_LoadWAV("res/sfx/boing3.wav");
 }
 
 void Sound::free()
