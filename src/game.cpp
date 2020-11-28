@@ -2,6 +2,7 @@
 #include <iostream>
 #include "statehandler.hpp"
 #include "renderer.hpp"
+#include "timer.hpp"
 
 Game::Game()
 {
@@ -29,6 +30,7 @@ Game::~Game()
 
 void Game::run()
 {
+    Timer::start();
     while(StateHandler::getCurrentStateID() != States::QUIT)
     {
         StateHandler::getCurrentState()->events();
@@ -36,6 +38,7 @@ void Game::run()
         StateHandler::changeState();
         StateHandler::getCurrentState()->update();
         StateHandler::getCurrentState()->render();
+        Timer::countFrame();
     }
 }
 

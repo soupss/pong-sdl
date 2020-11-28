@@ -1,8 +1,10 @@
 #include "playing.hpp"
 #include <iostream>
+#include <sstream>
 #include "game.hpp"
 #include "statehandler.hpp"
 #include "renderer.hpp"
+#include "timer.hpp"
 #include "colors.hpp"
 
 Playing::Playing()
@@ -50,6 +52,10 @@ void Playing::render()
 {
     const SDL_Color bg = Colors::BACKGROUND;
     Renderer::clear(bg.r, bg.g, bg.b);
+    std::stringstream fps;
+    fps << Timer::getAvgFps();
+    SDL_Color orange = Colors::PRIMARY;
+    Renderer::renderText(font, fps.str(), 45, 10, orange);
     Renderer::renderRect(player1->getRect());
     Renderer::renderRect(player2->getRect());
     Renderer::renderRect(ball->getRect());
