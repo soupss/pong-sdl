@@ -8,9 +8,10 @@ class Sprite
     public:
         Sprite() = default;
         virtual ~Sprite() = default;
-        virtual void move() = 0; //defined in derived classes
+        virtual void move() = 0; //calculate pos from vel, different in each subclass
         void update(); //update rect with new pos
         inline SDL_Rect* getRect() {return &rect;}
+        inline Vector2f* getPos() {return &pos;}
     protected:
         SDL_Rect rect;
         Vector2f pos;

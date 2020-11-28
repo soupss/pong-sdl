@@ -2,7 +2,8 @@
 #define PLAYING_HPP
 #include <SDL2/SDL_ttf.h>
 #include "gamestate.hpp"
-#include "sprite.hpp"
+#include "paddle.hpp"
+#include "ball.hpp"
 
 class Playing : public GameState
 {
@@ -13,11 +14,12 @@ class Playing : public GameState
         void update() override;
         void render() override;
     private:
+        void handleInput();
         TTF_Font* font;
-        //pointers to base class
+        //pointers to sprite base class
         //defined in Playing::Playing()
-        Sprite* player1;
-        Sprite* player2;
-        Sprite* ball;
+        Paddle* player1;
+        Paddle* player2;
+        Ball* ball;
 };
 #endif

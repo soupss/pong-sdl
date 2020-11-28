@@ -4,8 +4,6 @@
 #include "statehandler.hpp"
 #include "renderer.hpp"
 #include "colors.hpp"
-#include "paddle.hpp"
-#include "ball.hpp"
 
 Playing::Playing()
 {
@@ -34,20 +32,15 @@ void Playing::events()
         {
             StateHandler::setNextState(States::QUIT);
         }
-        //change paddle vel
-        //TODO:input
     }
+    handleInput();
 }
 
 void Playing::update()
 {
-    //change ball vel
-    //TODO:ball movement
-    //calculate sprite pos from vel
     player1->move();
     player2->move();
     ball->move();
-    //update sprite rect with new pos
     player1->update();
     player2->update();
     ball->update();
@@ -61,4 +54,43 @@ void Playing::render()
     Renderer::renderRect(player2->getRect());
     Renderer::renderRect(ball->getRect());
     Renderer::present();
+}
+
+void Playing::handleInput()
+{
+    const unsigned char* ks = SDL_GetKeyboardState(NULL); //keystate
+    //player1
+    if(ks[SDL_SCANCODE_W] && ks[SDL_SCANCODE_S])
+    {
+        player1->stop();
+    }
+    else if(ks[SDL_SCANCODE_W] && player1->getPos()->y > 0)
+    {
+        player1->up();
+    }
+    else if(ks[SDL_SCANCODE_S] && player1->getPos()->y + player1->getRect()->h < Game::GET_SCREEN_HEIGHT())
+    {
+        player1->down();
+    }
+    else
+    {
+        player1->stop();
+    }
+    //player2
+    if(ks[SDL_SCANCODE_UP] && ks[SDL_SCANCODE_DOWN])
+    {
+        player2->stop();
+    }
+    else if(ks[SDL_SCANCODE_UP] && player2->getPos()->y > 0)
+    {
+        player2->up();
+    }
+    else if(ks[SDL_SCANCODE_DOWN] && player2->getPos()->y + player2->getRect()->h < Game::GET_SCREEN_HEIGHT())
+    {
+        player2->down();
+    }
+    else
+    {
+        player2->stop();
+    }
 }
