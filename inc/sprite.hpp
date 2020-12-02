@@ -12,6 +12,7 @@ class Sprite
         void update(); //update rect with new pos
         inline SDL_Rect* getRect() {return &rect;}
         inline Vector2f* getPos() {return &pos;}
+        inline Vector2f* getDir() {return &dir;}
         inline void setY(float _y) {pos.y = _y;}
     protected:
         SDL_Rect rect;

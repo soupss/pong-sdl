@@ -22,6 +22,12 @@ void Ball::move()
     pos.y += speed * dir.y;
 }
 
+void Ball::back()
+{
+    pos.x -= speed * dir.x;
+    pos.y -= speed * dir.y;
+}
+
 void Ball::reset(int _x, int _y)
 {
     //initialize srand
@@ -31,6 +37,7 @@ void Ball::reset(int _x, int _y)
     dir.x = (rand() % 2) ? 1 : -1;
     dir.y = (rand() % 2) ? 1 : -1;
     bounces = 0;
+    speed = baseSpeed;
 }
 
 void Ball::up()

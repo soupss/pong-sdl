@@ -6,6 +6,7 @@
 #include "renderer.hpp"
 #include "timer.hpp"
 #include "colors.hpp"
+#include "collision.hpp"
 
 Playing::Playing()
 {
@@ -45,6 +46,7 @@ void Playing::update()
     player2->move();
     ball->move();
     //adjust pos
+    handleCollision();
     constraintPaddles();
     constraintBall();
     //send pos to rect
@@ -66,6 +68,8 @@ void Playing::render()
     Renderer::renderRect(ball->getRect());
     Renderer::present();
 }
+
+//private methods
 
 void Playing::handleInput()
 {
@@ -106,6 +110,85 @@ void Playing::handleInput()
     }
 }
 
+void Playing::handleCollision()
+{
+    //player1-ball
+    if(Collision::check(player1->getRect(),player1->getPos(), ball->getRect(), ball->getPos()))
+    {
+        //step back
+        ball->back();
+        //collide on bot or top of paddle
+        if(ball->getPos()->x < player1->getPos()->x + player1->getRect()->w)
+        {
+            //top side
+            if(ball->getPos()->y < player1->getPos()->y)
+            {
+                ball->up();
+                ball->move();
+                ball->setY(player1->getPos()->y - ball->getRect()->h);
+            }
+            //bot side
+            else
+            {
+                ball->down();
+                ball->move();
+                ball->setY(player1->getPos()->y + player1->getRect()->h);
+            }
+        }
+        //right side
+        else
+        {
+            ball->right();
+            //curve ball
+            if(player1->getDir()->y == -1)
+            {
+                ball->up();
+            }
+            else if(player1->getDir()->y == 1)
+            {
+                ball->down();
+            }
+        }
+    }
+    else if(Collision::check(player2->getRect(),player2->getPos(), ball->getRect(), ball->getPos()))
+    {
+        //step back
+        ball->back();
+        //collide on bot or top of paddle
+        if(ball->getPos()->x + ball->getRect()->w > player2->getPos()->x)
+        {
+            //top side
+            if(ball->getPos()->y < player2->getPos()->y)
+            {
+                ball->up();
+                ball->move();
+                ball->setY(player2->getPos()->y - ball->getRect()->h);
+            }
+            //bot side
+            else
+            {
+                ball->down();
+                ball->move();
+                ball->setY(player2->getPos()->y + player2->getRect()->h);
+            }
+        }
+        //left side
+        else
+        {
+            ball->left();
+            //curve ball
+            if(player2->getDir()->y == -1)
+            {
+                ball->up();
+            }
+            else if(player2->getDir()->y == 1)
+            {
+                ball->down();
+            }
+        }
+    }
+}
+
 void Playing::constraintPaddles()
 {
     //player1
@@ -138,12 +221,8 @@ void Playing::constraintBall()
     {
         ball->up();
     }
-    else if(ball->getPos()->x < 0)
+    else if(ball->getPos()->x < 0 || ball->getPos()->x + ball->getRect()->w > Game::GET_SCREEN_WIDTH())
     {
-        ball->right();
-    }
-    else if(ball->getPos()->x + ball->getRect()->w > Game::GET_SCREEN_WIDTH())
-    {
-        ball->left();
+        ball->reset(Game::GET_SCREEN_WIDTH() / 2 - Ball::WIDTH / 2, Game::GET_SCREEN_HEIGHT() / 2 - Ball::HEIGHT / 2);
     }
 }
