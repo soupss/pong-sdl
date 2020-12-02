@@ -2,6 +2,6 @@
 
 void Sprite::update()
 {
-    rect.x = pos.x;
-    rect.y = pos.y;
+    rect.x = round(pos.x);
+    rect.y = round(pos.y);
 }

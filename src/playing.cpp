@@ -40,6 +40,7 @@ void Playing::events()
 
 void Playing::update()
 {
+    constraintBall();
     player1->move();
     player2->move();
     ball->move();
@@ -98,5 +99,25 @@ void Playing::handleInput()
     else
     {
         player2->stop();
+    }
+}
+
+void Playing::constraintBall()
+{
+    if(ball->getPos()->y < 0)
+    {
+        ball->down();
+    }
+    else if(ball->getPos()->y + ball->getRect()->h > Game::GET_SCREEN_HEIGHT())
+    {
+        ball->up();
+    }
+    else if(ball->getPos()->x < 0)
+    {
+        ball->right();
+    }
+    else if(ball->getPos()->x + ball->getRect()->w > Game::GET_SCREEN_WIDTH())
+    {
+        ball->left();
     }
 }

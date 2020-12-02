@@ -15,9 +15,8 @@ class Playing : public GameState
         void render() override;
     private:
         void handleInput();
+        void constraintBall(); //constraint ball to screen
         TTF_Font* font;
-        //pointers to sprite base class
-        //defined in Playing::Playing()
         Paddle* player1;
         Paddle* player2;
         Ball* ball;

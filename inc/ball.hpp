@@ -11,7 +11,14 @@ class Ball : public Sprite
         Ball(float _x, float _y);
         ~Ball() override;
         void move() override;
+        void reset(int _x, int _y);
+        void up();
+        void down();
+        void left();
+        void right();
     private:
-        const int speed = 5;
+        void increaseSpeed();
+        float speed = 3.5f;
+        int bounces = 0;
 };
 #endif

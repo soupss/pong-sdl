@@ -11,10 +11,10 @@ class Paddle : public Sprite
         Paddle(float _x, float _y);
         ~Paddle() override;
         void move() override;
-        inline void up() {vel.y = -1;}
-        inline void down() {vel.y = 1;}
-        inline void stop() {vel.y = 0;}
+        inline void up() {dir.y = -1;}
+        inline void down() {dir.y = 1;}
+        inline void stop() {dir.y = 0;}
     private:
-        const float speed = 3;
+        const float speed = 5.0f;
 };
 #endif
