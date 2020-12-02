@@ -40,10 +40,14 @@ void Playing::events()
 
 void Playing::update()
 {
-    constraintBall();
+    //update pos
     player1->move();
     player2->move();
     ball->move();
+    //adjust pos
+    constraintPaddles();
+    constraintBall();
+    //send pos to rect
     player1->update();
     player2->update();
     ball->update();
@@ -71,11 +75,11 @@ void Playing::handleInput()
     {
         player1->stop();
     }
-    else if(ks[SDL_SCANCODE_W] && player1->getPos()->y > 0)
+    else if(ks[SDL_SCANCODE_W])
     {
         player1->up();
     }
-    else if(ks[SDL_SCANCODE_S] && player1->getPos()->y + player1->getRect()->h < Game::GET_SCREEN_HEIGHT())
+    else if(ks[SDL_SCANCODE_S])
     {
         player1->down();
     }
@@ -88,17 +92,39 @@ void Playing::handleInput()
     {
         player2->stop();
     }
-    else if(ks[SDL_SCANCODE_UP] && player2->getPos()->y > 0)
+    else if(ks[SDL_SCANCODE_UP])
     {
         player2->up();
     }
-    else if(ks[SDL_SCANCODE_DOWN] && player2->getPos()->y + player2->getRect()->h < Game::GET_SCREEN_HEIGHT())
+    else if(ks[SDL_SCANCODE_DOWN])
     {
         player2->down();
     }
     else
     {
         player2->stop();
+    }
+}
+
+void Playing::constraintPaddles()
+{
+    //player1
+    if(player1->getPos()->y < 0)
+    {
+        player1->setY((float)(0.0f));
+    }
+    else if(player1->getPos()->y + player1->getRect()->h > Game::GET_SCREEN_HEIGHT())
+    {
+        player1->setY((float)(Game::GET_SCREEN_HEIGHT() - player1->getRect()->h));
+    }
+    //player2
+    if(player2->getPos()->y < 0)
+    {
+        player2->setY((float)(0.0f));
+    }
+    else if(player2->getPos()->y + player2->getRect()->h > Game::GET_SCREEN_HEIGHT())
+    {
+        player2->setY((float)(Game::GET_SCREEN_HEIGHT() - player2->getRect()->h));
     }
 }
 

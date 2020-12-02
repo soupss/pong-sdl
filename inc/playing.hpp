@@ -15,6 +15,7 @@ class Playing : public GameState
         void render() override;
     private:
         void handleInput();
+        void constraintPaddles(); //constraint paddles to screen
         void constraintBall(); //constraint ball to screen
         TTF_Font* font;
         Paddle* player1;
