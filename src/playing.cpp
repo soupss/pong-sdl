@@ -19,7 +19,7 @@ Playing::Playing()
     //define sprites
     player1 = new Paddle(spacing, paddleY);
     player2 = new Paddle(Game::GET_SCREEN_WIDTH() - Paddle::WIDTH - spacing, paddleY);
-    ball = new Ball(Game::GET_SCREEN_WIDTH() / 2 - Ball::WIDTH / 2, Game::GET_SCREEN_HEIGHT() / 2 - Ball::HEIGHT / 2);
+    ball = new Ball(Game::GET_SCREEN_WIDTH() / 2 - Ball::WIDTH / 2, Game::GET_SCREEN_HEIGHT() - Ball::HEIGHT);
 }
 
 Playing::~Playing()
@@ -239,11 +239,11 @@ void Playing::constraintBall()
     else if(ball->getPos()->x + ball->getRect()->w < 0 )
     {
         ++player2score;
-        ball->reset(Game::GET_SCREEN_WIDTH() / 2 - Ball::WIDTH / 2, Game::GET_SCREEN_HEIGHT() / 2 - Ball::HEIGHT / 2);
+        ball->reset(Game::GET_SCREEN_WIDTH() / 2 - Ball::WIDTH / 2, Game::GET_SCREEN_HEIGHT() - Ball::HEIGHT);
     }
     else if(ball->getPos()->x > Game::GET_SCREEN_WIDTH())
     {
         ++player1score;
-        ball->reset(Game::GET_SCREEN_WIDTH() / 2 - Ball::WIDTH / 2, Game::GET_SCREEN_HEIGHT() / 2 - Ball::HEIGHT / 2);
+        ball->reset(Game::GET_SCREEN_WIDTH() / 2 - Ball::WIDTH / 2, Game::GET_SCREEN_HEIGHT() - Ball::HEIGHT);
     }
 }

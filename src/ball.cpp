@@ -1,10 +1,11 @@
 #include "ball.hpp"
 #include <cstdlib>
 #include <ctime>
+#include "game.hpp"
 
-Ball::Ball(float _x, float _y)
+Ball::Ball(float _x, float _maxY)
 {
-    reset(_x, _y);
+    reset(_x, _maxY);
     //rect pos defined in Sprite::update
     rect = {0, 0, WIDTH, HEIGHT};
 }
@@ -28,12 +29,13 @@ void Ball::back()
     pos.y -= speed * dir.y;
 }
 
-void Ball::reset(int _x, int _y)
+void Ball::reset(int _x, int _maxY)
 {
     //initialize srand
     srand(time(NULL));
     pos.x = _x;
-    pos.y = _y;
+    //randmize Y position and direction
+    pos.y = rand() % _maxY;
     dir.x = (rand() % 2) ? 1 : -1;
     dir.y = (rand() % 2) ? 1 : -1;
     bounces = 0;
