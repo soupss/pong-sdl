@@ -45,14 +45,15 @@ void Playing::events()
 
 void Playing::update()
 {
+    handleCollision();
+    constraintBall();
     //update pos
     player1->move();
     player2->move();
     ball->move();
     //adjust pos
-    handleCollision();
+    //constraintBall doesnt set pos directly, hence its separated from constraintPaddles
     constraintPaddles();
-    constraintBall();
     //send pos to rect
     player1->update();
     player2->update();
@@ -129,7 +130,7 @@ void Playing::handleCollision()
         Sound::playBoing();
         //step back
         ball->back();
-        //collide on bot or top of paddle
+        //if left side of ball is left of right side of paddle, it must be a collision on top or bottom side of paddle
         if(ball->getPos()->x < player1->getPos()->x + player1->getRect()->w)
         {
             //top side
@@ -167,7 +168,7 @@ void Playing::handleCollision()
         Sound::playBoing();
         //step back
         ball->back();
-        //collide on bot or top of paddle
+        //if right side of ball is right of left side of paddle, it must be a collision on top or bottom side of paddle
         if(ball->getPos()->x + ball->getRect()->w > player2->getPos()->x)
         {
             //top side
