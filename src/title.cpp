@@ -4,6 +4,7 @@
 #include "statehandler.hpp"
 #include "renderer.hpp"
 #include "colors.hpp"
+#include "sound.hpp"
 
 Title::Title()
 {
@@ -27,6 +28,7 @@ void Title::events()
         else if(event.type == SDL_KEYDOWN &&
                 (event.key.keysym.sym == SDLK_RETURN || event.key.keysym.sym == SDLK_SPACE))
         {
+            Sound::playBlip2();
             StateHandler::setNextState(States::MENU);
         }
     }

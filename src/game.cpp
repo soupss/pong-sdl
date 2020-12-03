@@ -1,5 +1,6 @@
 #include "game.hpp"
 #include <iostream>
+#include "sound.hpp"
 #include "statehandler.hpp"
 #include "renderer.hpp"
 #include "timer.hpp"
@@ -14,6 +15,7 @@ Game::Game()
     {
         //prepare
         Renderer::create(window);
+        Sound::loadAll();
         //set the first state and change to it
         StateHandler::setNextState(States::TITLE);
         StateHandler::changeState();
@@ -60,23 +62,25 @@ void Game::destroyFont(TTF_Font* _font)
 
 bool Game::init()
 {
-    if(SDL_Init(SDL_INIT_VIDEO) != 0)
+    bool success = true;
+    if(SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO) != 0)
     {
         std::cerr << "SDL_Init error: " << SDL_GetError() << std::endl;
-        return false;
+        success = false;
     }
     window = SDL_CreateWindow("Pong", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, 0);
     if(window == NULL)
     {
         std::cerr << "Error creating window: " << SDL_GetError() << std::endl;
-        return false;
+        success = false;
     }
     //libs
     if(TTF_Init() == -1)
     {
         std::cerr << "TTF_Init error: " << TTF_GetError() << std::endl;
-        return false;
+        success = false;
     }
+    success = Sound::init();
     //init success
-    return true;
+    return success;
 }

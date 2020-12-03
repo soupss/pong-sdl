@@ -5,6 +5,7 @@
 #include "statehandler.hpp"
 #include "renderer.hpp"
 #include "colors.hpp"
+#include "sound.hpp"
 
 Menu::Menu()
     :selected(0)
@@ -31,16 +32,19 @@ void Menu::events()
             {
                 case SDLK_DOWN:
                 case SDLK_j:
+                    Sound::playBlip1();
                     selectNext();
                     break;
                 case SDLK_UP:
                 case SDLK_k:
+                    Sound::playBlip1();
                     selectPrev();
                     break;
                 case SDLK_RETURN:
                     switch(selected)
                     {
                         case 0: //play
+                            Sound::playBlip2();
                             StateHandler::setNextState(States::PLAYING);
                             break;
                         case 1: //quit

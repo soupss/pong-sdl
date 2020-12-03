@@ -7,6 +7,7 @@
 #include "timer.hpp"
 #include "colors.hpp"
 #include "collision.hpp"
+#include "sound.hpp"
 
 Playing::Playing()
     :player1score(0), player2score(0)
@@ -125,6 +126,7 @@ void Playing::handleCollision()
     //player1-ball
     if(Collision::check(player1->getRect(),player1->getPos(), ball->getRect(), ball->getPos()))
     {
+        Sound::playBoing();
         //step back
         ball->back();
         //collide on bot or top of paddle
@@ -162,6 +164,7 @@ void Playing::handleCollision()
     }
     else if(Collision::check(player2->getRect(),player2->getPos(), ball->getRect(), ball->getPos()))
     {
+        Sound::playBoing();
         //step back
         ball->back();
         //collide on bot or top of paddle
@@ -225,10 +228,12 @@ void Playing::constraintBall()
 {
     if(ball->getPos()->y < 0)
     {
+        Sound::playBoing();
         ball->down();
     }
     else if(ball->getPos()->y + ball->getRect()->h > Game::GET_SCREEN_HEIGHT())
     {
+        Sound::playBoing();
         ball->up();
     }
     else if(ball->getPos()->x + ball->getRect()->w < 0 )
