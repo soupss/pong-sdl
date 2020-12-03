@@ -18,9 +18,12 @@ class Playing : public GameState
         void handleCollision(); //called in update
         void constraintPaddles(); //constraint paddles to screen, called in update
         void constraintBall(); //constraint ball to screen, called in update
-        TTF_Font* font;
+        TTF_Font* smallFont;
+        TTF_Font* bigFont;
         Paddle* player1;
         Paddle* player2;
         Ball* ball;
+        int player1score;
+        int player2score;
 };
 #endif

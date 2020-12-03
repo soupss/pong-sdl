@@ -9,8 +9,10 @@
 #include "collision.hpp"
 
 Playing::Playing()
+    :player1score(0), player2score(0)
 {
-    font = Game::loadFont(40);
+    smallFont = Game::loadFont(38);
+    bigFont = Game::loadFont(50);
     int spacing = 100;
     int paddleY = Game::GET_SCREEN_HEIGHT() / 2 - Paddle::HEIGHT / 2;
     //define sprites
@@ -21,7 +23,8 @@ Playing::Playing()
 
 Playing::~Playing()
 {
-    Game::destroyFont(font);
+    Game::destroyFont(smallFont);
+    Game::destroyFont(bigFont);
     delete player1;
     delete player2;
     delete ball;
@@ -59,10 +62,17 @@ void Playing::render()
 {
     const SDL_Color bg = Colors::BACKGROUND;
     Renderer::clear(bg.r, bg.g, bg.b);
+    //ui
+        //fps
     std::stringstream fps;
     fps << Timer::getAvgFps();
     SDL_Color orange = Colors::PRIMARY;
-    Renderer::renderText(font, fps.str(), 45, 10, orange);
+    Renderer::renderText(smallFont, fps.str(), 45, 10, orange);
+        //score
+    std::stringstream score;
+    score << player1score << " " << player2score;
+    Renderer::renderText(bigFont, score.str(), Game::GET_SCREEN_WIDTH() / 2, 50);
+    //sprites
     Renderer::renderRect(player1->getRect());
     Renderer::renderRect(player2->getRect());
     Renderer::renderRect(ball->getRect());
@@ -221,8 +231,14 @@ void Playing::constraintBall()
     {
         ball->up();
     }
-    else if(ball->getPos()->x < 0 || ball->getPos()->x + ball->getRect()->w > Game::GET_SCREEN_WIDTH())
+    else if(ball->getPos()->x + ball->getRect()->w < 0 )
     {
+        ++player2score;
+        ball->reset(Game::GET_SCREEN_WIDTH() / 2 - Ball::WIDTH / 2, Game::GET_SCREEN_HEIGHT() / 2 - Ball::HEIGHT / 2);
+    }
+    else if(ball->getPos()->x > Game::GET_SCREEN_WIDTH())
+    {
+        ++player1score;
         ball->reset(Game::GET_SCREEN_WIDTH() / 2 - Ball::WIDTH / 2, Game::GET_SCREEN_HEIGHT() / 2 - Ball::HEIGHT / 2);
     }
 }
