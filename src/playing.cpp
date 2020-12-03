@@ -2,6 +2,7 @@
 #include <iostream>
 #include <sstream>
 #include "game.hpp"
+#include "font.hpp"
 #include "statehandler.hpp"
 #include "renderer.hpp"
 #include "timer.hpp"
@@ -12,8 +13,8 @@
 Playing::Playing()
     :player1score(0), player2score(0)
 {
-    smallFont = Game::loadFont(38);
-    bigFont = Game::loadFont(50);
+    smallFont = Font::loadFont(38);
+    bigFont = Font::loadFont(50);
     int spacing = 100;
     int paddleY = Game::GET_SCREEN_HEIGHT() / 2 - Paddle::HEIGHT / 2;
     //define sprites
@@ -24,8 +25,8 @@ Playing::Playing()
 
 Playing::~Playing()
 {
-    Game::destroyFont(smallFont);
-    Game::destroyFont(bigFont);
+    Font::destroyFont(smallFont);
+    Font::destroyFont(bigFont);
     delete player1;
     delete player2;
     delete ball;

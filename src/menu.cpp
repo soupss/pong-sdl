@@ -5,17 +5,18 @@
 #include "statehandler.hpp"
 #include "renderer.hpp"
 #include "colors.hpp"
+#include "font.hpp"
 #include "sound.hpp"
 
 Menu::Menu()
     :selected(0)
 {
-    font = Game::loadFont(50);
+    font = Font::loadFont(50);
 }
 
 Menu::~Menu()
 {
-    Game::destroyFont(font);
+    Font::destroyFont(font);
 }
 
 void Menu::events()

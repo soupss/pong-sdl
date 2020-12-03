@@ -5,15 +5,16 @@
 #include "renderer.hpp"
 #include "colors.hpp"
 #include "sound.hpp"
+#include "font.hpp"
 
 Title::Title()
 {
-    font = Game::loadFont(120);
+    font = Font::loadFont(120);
 }
 
 Title::~Title()
 {
-    Game::destroyFont(font);
+    Font::destroyFont(font);
 }
 
 void Title::events()

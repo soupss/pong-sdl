@@ -5,8 +5,8 @@
 class Ball : public Sprite
 {
     public:
-        inline const static int WIDTH = 50;
-        inline const static int HEIGHT = 50;
+        inline const static int WIDTH = 20;
+        inline const static int HEIGHT = 20;
         Ball();
         Ball(float _x, float _maxY);
         ~Ball() override;
@@ -20,7 +20,7 @@ class Ball : public Sprite
         void right();
     private:
         void increaseSpeed();
-        const float baseSpeed = 2.5f;
+        const float baseSpeed = 3.5f;
         float speed = baseSpeed;
         int bounces = 0;
 };
