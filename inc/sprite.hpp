@@ -18,6 +18,5 @@ class Sprite
         SDL_Rect rect;
         Vector2f pos;
         Vector2f dir;
-        float speed;
 };
 #endif

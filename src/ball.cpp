@@ -3,11 +3,19 @@
 #include <ctime>
 #include "game.hpp"
 
-Ball::Ball(float _x, float _maxY)
+Ball::Ball(float _x, int _maxY)
 {
-    reset(_x, _maxY);
     //rect pos defined in Sprite::update
     rect = {0, 0, WIDTH, HEIGHT};
+    bounces = 0;
+    speed = baseSpeed;
+    //initialize srand
+    srand(time(NULL));
+    pos.x = _x;
+    //randmize Y position and direction
+    pos.y = rand() % _maxY;
+    dir.x = (rand() % 2) ? 1 : -1;
+    dir.y = (rand() % 2) ? 1 : -1;
 }
 
 Ball::Ball()
@@ -27,19 +35,6 @@ void Ball::back()
 {
     pos.x -= speed * dir.x;
     pos.y -= speed * dir.y;
-}
-
-void Ball::reset(int _x, int _maxY)
-{
-    //initialize srand
-    srand(time(NULL));
-    pos.x = _x;
-    //randmize Y position and direction
-    pos.y = rand() % _maxY;
-    dir.x = (rand() % 2) ? 1 : -1;
-    dir.y = (rand() % 2) ? 1 : -1;
-    bounces = 0;
-    speed = baseSpeed;
 }
 
 void Ball::up()

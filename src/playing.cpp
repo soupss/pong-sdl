@@ -126,10 +126,10 @@ void Playing::handleInput()
 void Playing::handleCollision()
 {
     //player1-ball
-    if(Collision::check(player1->getRect(),player1->getPos(), ball->getRect(), ball->getPos()))
+    if(Collision::isColliding(player1->getRect(),player1->getPos(), ball->getRect(), ball->getPos()))
     {
         Sound::playBoing();
-        //step back
+        //separate the ball and the paddle to calculate which way the ball should bounce
         ball->back();
         //if left side of ball is left of right side of paddle, it must be a collision on top or bottom side of paddle
         if(ball->getPos()->x < player1->getPos()->x + player1->getRect()->w)
@@ -164,10 +164,10 @@ void Playing::handleCollision()
             }
         }
     }
-    else if(Collision::check(player2->getRect(),player2->getPos(), ball->getRect(), ball->getPos()))
+    else if(Collision::isColliding(player2->getRect(),player2->getPos(), ball->getRect(), ball->getPos()))
     {
         Sound::playBoing();
-        //step back
+        //separate the ball and the paddle to calculate which way the ball should bounce
         ball->back();
         //if right side of ball is right of left side of paddle, it must be a collision on top or bottom side of paddle
         if(ball->getPos()->x + ball->getRect()->w > player2->getPos()->x)
@@ -241,11 +241,13 @@ void Playing::constraintBall()
     else if(ball->getPos()->x + ball->getRect()->w < 0 )
     {
         ++player2score;
-        ball->reset(Game::GET_SCREEN_WIDTH() / 2 - Ball::WIDTH / 2, Game::GET_SCREEN_HEIGHT() - Ball::HEIGHT);
+        delete ball;
+        ball = new Ball(Game::GET_SCREEN_WIDTH() / 2 - Ball::WIDTH / 2, Game::GET_SCREEN_HEIGHT() - Ball::HEIGHT);
     }
     else if(ball->getPos()->x > Game::GET_SCREEN_WIDTH())
     {
         ++player1score;
-        ball->reset(Game::GET_SCREEN_WIDTH() / 2 - Ball::WIDTH / 2, Game::GET_SCREEN_HEIGHT() - Ball::HEIGHT);
+        delete ball;
+        ball = new Ball(Game::GET_SCREEN_WIDTH() / 2 - Ball::WIDTH / 2, Game::GET_SCREEN_HEIGHT() - Ball::HEIGHT);
     }
 }

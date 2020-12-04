@@ -5,7 +5,8 @@
 
 struct Collision
 {
-    static bool check(const SDL_Rect* _rectA, const Vector2f* _posA, const SDL_Rect* _rectB, const Vector2f* _posB);
+    static bool isColliding(const SDL_Rect* _rectA, const Vector2f* _posA, const SDL_Rect* _rectB, const Vector2f* _posB);
+    static bool isJammedAbove(const SDL_Rect* _rectA, const Vector2f* _posA, const SDL_Rect* _rectB, const Vector2f* _posB);
+    static bool isJammedBelow(const SDL_Rect* _rectA, const Vector2f* _posA, const SDL_Rect* _rectB, const Vector2f* _posB);
 };
-
 #endif

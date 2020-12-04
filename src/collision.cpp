@@ -1,6 +1,6 @@
 #include "collision.hpp"
 
-bool Collision::check(const SDL_Rect* _rectA, const Vector2f* _posA, const SDL_Rect* _rectB, const Vector2f* _posB)
+bool Collision::isColliding(const SDL_Rect* _rectA, const Vector2f* _posA, const SDL_Rect* _rectB, const Vector2f* _posB)
 {
     int topA, bottomA, leftA, rightA;
     int topB, bottomB, leftB, rightB;
@@ -20,15 +20,15 @@ bool Collision::check(const SDL_Rect* _rectA, const Vector2f* _posA, const SDL_R
     {
         return false;
     }
-    if(rightA <= leftB)
+    else if(rightA <= leftB)
     {
         return false;
     }
-    if(topA >= bottomB)
+    else if(topA >= bottomB)
     {
         return false;
     }
-    if(bottomA <= topB)
+    else if(bottomA <= topB)
     {
         return false;
     }

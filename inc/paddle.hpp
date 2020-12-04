@@ -5,8 +5,8 @@
 class Paddle : public Sprite
 {
     public:
-        inline const static int WIDTH = 15;
-        inline const static int HEIGHT = 80;
+        inline const static int WIDTH = 30;
+        inline const static int HEIGHT = 160;
         Paddle() = default;
         Paddle(float _x, float _y);
         ~Paddle() override;
