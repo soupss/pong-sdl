@@ -53,7 +53,6 @@ void Playing::update()
     player2->move();
     ball->move();
     //adjust pos
-    //constraintBall doesnt set pos directly, hence its separated from constraintPaddles
     constraintPaddles();
     //send pos to rect
     player1->update();
@@ -170,7 +169,7 @@ void Playing::handleCollision()
         //separate the ball and the paddle to calculate which way the ball should bounce
         ball->back();
         //if right side of ball is right of left side of paddle, it must be a collision on top or bottom side of paddle
-        if(ball->getPos()->x + ball->getRect()->w > player2->getPos()->x)
+        if(ball->getPos()->x + ball->getRect()->w - 5 > player2->getPos()->x)
         {
             //top side
             if(ball->getPos()->y < player2->getPos()->y)

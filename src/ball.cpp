@@ -63,9 +63,9 @@ void Ball::right()
 
 void Ball::increaseSpeed()
 {
-    if(bounces < 30)
+    if(bounces < 20)
     {
-        speed *= 1.02f;
+        speed *= 1.015f;
     }
     ++bounces;
 }
